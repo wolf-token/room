@@ -1,0 +1,45 @@
+{template 'common/header'}
+
+
+<ul class="nav nav-tabs">
+      <li class="active"><a href="{php echo  $this->createWebUrl('math', array('op'=>'list'));}">推荐人数规则列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('math', array('op'=>'add'));}">推荐人数规则添加</a></li>
+     <li><a href="{php echo  $this->createWebUrl('math', array('op'=>'tisment'));}">广告位信息</a></li>
+       <li><a href="{php echo  $this->createWebUrl('math', array('op'=>'tisment_add'));}">广告位信息添加</a></li>
+</ul>
+<div class="main">
+  
+    </div>
+    <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        
+                        <th style="width:15%;">规则ID</th>
+                        <th style="width:15%;">最大的推荐客户数量</th>
+                        <th style="width:15%;">最大的推荐联系人数量</th>
+                        <th style="width:15%;">创建时间</th>
+                        <th style="width:15%;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $math $item}
+                    <tr>
+                        <td>{$item['id']}</td>
+                        <td>{$item['client']}&nbsp;&nbsp;人</td>
+                        <td>{$item['person']}&nbsp;&nbsp;人</td>
+                       <td>{$item['time']}</td>
+
+                        <td style="text-align:left;">
+                            <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('math', array('op'=>'edit','id'=>$item['id']));}" title="编辑">编辑</a>
+                      </td>            
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>

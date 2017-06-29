@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>推荐信息</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	body{
+		font-family:"楷体";
+	}
+		li{
+			list-style: none;
+		}
+		span{
+			/*border:1px solid red;*/
+			 font-family:"楷体";
+			color: black;
+			font-size
+			font-size: 25px;
+			background: white;
+			padding: 5px;
+		}
+		a{
+			text-decoration:none;
+			color: black;
+		}
+		.a{
+			background: #A9D28E;
+			color: white;
+		}
+		td{
+			text-align: center;
+		}
+		.b{
+			background: white;
+			color: black;
+		}
+		.her-span{
+			width: 159px;
+    		height: 30px;
+    		margin: 0 auto;
+    		padding-top: 16px;
+    		/*border: 1px solid red;*/
+		}
+	</style>
+<!-- <script type="text/javascript" src="/addons/iw_house/template/mobile/js/hammer.js"></script> -->
+<script type="text/javascript" src="/app/resource/js/lib/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div style="float:right;width: 100%;height:50px;background: #515151;">
+		<div class="her-span">
+			<span id="span1">团队推荐</span>
+			<span id="span2" class="a">自己推荐</span>
+		</div>
+	</div>
+	<table id="taler" style="display: none; background:#fff;">
+		<tr>
+			<td rowspan="2">
+			{if $private['avatar'] == ""}
+				<img height="50%" src="/addons/iw_house/template/mobile/images/head.jpg">
+			{else}
+				<img height="80%" src="{$private['avatar']}">
+			
+			{/if}
+			</td>
+			<td>
+				<img height="30%" src="/addons/iw_house/template/mobile/images/4.png">{$private['realname']}
+			</td>
+			<td>
+				<img height="13%" src="/addons/iw_house/template/mobile/images/commission.png">{$private['comm']['money']}千/金币
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<img height="10%" src="/addons/iw_house/template/mobile/images/rank.png">{if $private['rank']['type'] == 1}
+					一级
+				{elseif $private['rank']['type'] == 2}
+					二级
+				{elseif $private['rank']['type'] == 3}
+					三级
+				{/if}
+			</td>
+			<td>
+				<img height="30%" src="/addons/iw_house/template/mobile/images/5.png">{$private['mobile']}
+			</td>
+		</tr>
+	</table>
+	<div id="taler1" style="display:none;width: 100%;height:30px;background: #A9D28E;text-align: center;line-height: 30px;color: white;font-weight: bold;">
+		{if $private['rank']['type'] == 1}
+			二级 {$type2} 人&nbsp;&nbsp;<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'run','id'=>$private['id']))}"><span style="color: white;background: #A9D28E">（→三级）</span></a>
+		{elseif $private['rank']['type'] == 2}
+			三级 {$type3} 人
+		{/if}
+	</div>
+	<table id="tall" style="display: none;">
+		<thead>
+			<tr>
+				<th><img width="30%" src="/addons/iw_house/template/mobile/images/my.png">姓名</th>
+				<th><img height="13%" src="/addons/iw_house/
+				template/mobile/images/commission.png">佣金</th>
+				<th><img width="30%" src="/addons/iw_house/template/mobile/images/11.png">头像</th>
+				{if $private['rank']['type'] == 1}
+				<th><img width="30%" src="/addons/iw_house/template/mobile/images/branches.png">团圆</th>
+				{/if}
+			</tr>
+		</thead>
+		<tbody>
+		<tr></tr>
+		<tr></tr>
+		{loop $group $it}
+		<tr>
+			<td width="25%">
+				<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'rank','pid'=>$it['id']))}">{$it['realname']}
+				</a>
+			</td>
+			<td width="25%">
+				<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'rank','pid'=>$it['id']))}">{$it['comm']['money']}千/金币</a>
+			</td>
+			<td width="25%">
+				<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'rank','pid'=>$it['id']))}"><img width="40%" src="{$it['avatar']}"></a>
+			</td>
+			{if $private['rank']['type'] == 1}
+			<td>
+				<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'order','cid'=>$it['id']))}">
+					<div style="width:50%;margin:0 auto;font-size: 15px;border-radius: 5px;color: white;background:#A9D28E;">三级
+					</div>
+				</a>
+			</td>
+			{/if}
+		</tr>
+		{/loop}
+		</tbody>
+
+	</table>
+	<table id="ta">
+		<thead>
+			<tr>
+				<th><img width="30%" src="/addons/iw_house/template/mobile/images/my.png">姓名</th>
+				<th><img width="30%" src="/addons/iw_house/template/mobile/images/fly.png">意向</th>
+				<th><img width="30%" src="/addons/iw_house/template/mobile/images/heart.png">状态</th>
+			</tr>
+		</thead>
+		<tbody style="border-top:1px solid red;">
+		<tr></tr>
+		<tr></tr>
+		{loop $team $item}
+		<tr>
+			<td width="25%">{$item['name']}</td>
+			<td width="25%">{$item['intention']}</td>
+			<td width="25%">
+				{if $item['buy_status'] == 0}
+					推荐中
+				{elseif $item['buy_status'] == 1}
+					已分配
+				{elseif $item['buy_status'] == 2}
+					已定房
+				{elseif $item['buy_status'] == 3}
+					已付款
+				{/if}
+				<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'myself','id'=>$item['id']))}">
+					<img style="width: 20%;" src="/addons/iw_house/template/mobile/images/branch.png">
+				</a>
+			</td>
+		</tr>
+		{/loop}
+		</tbody>
+
+	</table>
+	<div style="width: 100%;height: 60px"></div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+
+		//点击事件
+		$("#span1").click(function(){
+
+			//改变样式
+			$(this).attr("class","a");
+			$("#span2").attr("class","b");
+			//隐藏信息
+			$("#ta").css("display","none");
+			$("#taler").css("display","block");
+			$("#taler1").css("display","block");
+			$("#tall").css("display","block");
+		});
+		$("#span2").click(function(){
+
+			//改变样式
+			$(this).attr("class","a");
+			$("#span1").attr("class","b");
+			//隐藏信息
+			$("#ta").css("display","block");
+			$("#taler").css("display","none");
+			$("#taler1").css("display","none");
+			$("#tall").css("display","none");
+		});
+
+	})
+</script>

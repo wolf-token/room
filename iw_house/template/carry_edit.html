@@ -1,0 +1,64 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('carrylist', array('op'=>'list'));}">提现记录列表</a></li>
+       <li class="active"><a>修改提现记录</a></li>
+     <li><a href="{php echo  $this->createWebUrl('carrylist', array('op'=>'add'));}">添加提现</a></li>
+</ul>
+<div class="main">
+	<div class="clearfix">    
+    <form id="theform" class="form form-horizontal" action="./index.php?c=site&a=entry&op=update&do=carrylist&m=iw_house" method="post">
+    
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                修改提现信息
+            </div>
+            <div class="panel-body">
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">提现人姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" id="name" value="{$carry_edit['name']}" class="form-control">
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="{$carry_edit['id']}">
+                <input type="hidden" name="users_id" value="{$data['id']}">
+                <input type="hidden" name="commission_id" value="{$commission['id']}">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">提现人电话</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="mobile" id="mobile" maxlength="11" value="{$carry_edit['cell']}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">提现金额</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="number" name="money" value="{$carry_edit['money']}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">提现状态</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="status" style="height:32px">
+                         <option value="0" {if $carry_edit['status'] == 0} selected="selected" {/if}>未提现</option>
+                         <option value="1" {if $carry_edit["status"] == 1} selected="selected" {/if}>已提现</option>
+                        
+                       </select>
+                    </div>
+                </div>
+                
+                <div class="form-group" style="margin-top: 50px">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <input name="submit" type="submit" value="保存" class="btn btn-primary btn-block">
+                        <input type="hidden" name="token" value="85616f84">
+                    </div>
+                </div>
+        
+            </div>
+      
+    
+        </div>
+    </form>
+</div>
+</div>

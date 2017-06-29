@@ -1,0 +1,55 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li {if $operation == 'rule'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rule'));}">规则设置</a></li>
+    <li class="active"><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank'));}">等级设置</a></li>
+     <li {if $operation == 'assign'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'assign'));}">分配金额设置</a></li>
+     <!--  <li {if $operation == 'agreement'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'agreement'));}">用户服务协议设置</a></li> -->
+</ul>
+<div class="main">
+      <div class="panel panel-default">
+            <div class="panel-heading">
+                等级信息
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs" id="myTab">
+                     <li {if $operation == 'rank'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank'));}">三级升二级规则信息</a></li>
+                    <li {if $operation == 'rank_add'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank_add'));}">三级升二级规则设置</a></li>
+                    <li {if $operation == 'rank_list_one'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank_list_one'));}">二级升一级规则信息</a></li>
+                     <li {if $operation == 'rank_add_one'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank_add_one'));}">二级升一级规则设置</a></li>
+                </ul>
+                <div class="tab-content">
+                {loop $rank_list $item}
+                    <div class="tab-pane  active" id="tab_basic">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐经济人数</label>
+                            <div class="col-sm-9">
+                             <span>{$item['person']}&nbsp;&nbsp;人</span>
+                            </div>
+                        </div> 
+                        <div class="form-group" style="padding-top: 50px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐客户购房数</label>
+                            <div class="col-sm-9">
+                            <span>{$item['room']}&nbsp;&nbsp;套</span>
+                            </div>
+                        </div>                         
+                       <div class="form-group" style="padding-top: 50px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">规则说明</label>
+                            <div class="col-sm-9">
+                             {php echo tpl_ueditor('content',$item['information']);}
+                            </div>
+                        </div>
+                          <div class="form-group" style="position: relative;top: 10px">
+                             <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                         <div class="col-sm-9">
+                            <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank_edit','id'=>$item['id']));}" title="编辑">修改规则</a>
+                         </div>
+                           
+                        </div>
+                      
+                    </div>
+                {/loop}
+                </div>
+            </div>
+        </div>
+ 
+ </div>  

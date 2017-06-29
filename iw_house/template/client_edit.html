@@ -1,0 +1,82 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li {if $operation == 'list'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'list'));}">经纪人列表</a></li>
+     <li  {if $operation == 'edit'} class="active" {/if}><a>修改经纪人信息</a></li>
+   <li {if $operation == 'client'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'client'));}">客户列表</a></li>
+   <li {if $operation == 'client_edit'} class="active" {/if}><a>修改客户信息</a></li>
+</ul>
+<div class="main">
+	<div class="clearfix"> 
+  <div class="alert alert-info">
+        <h4>
+            <i class="fa fa-info-circle"></i>
+            说明: 修改客户信息时，请仔细核对信息防止修改错误。<br>
+        </h4>
+       
+    </div>   
+    <form id="theform" class="form form-horizontal" action="./index.php?c=site&a=entry&op=client_update&do=brokerlist&m=iw_house" method="post">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                修改客户信息
+            </div>
+            <div class="panel-body">
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">客户姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" id="name" value="{$client_edit['name']}" class="form-control">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">客户电话</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="tell" name="phone" id="phone" maxlength="11" value="{$client_edit['phone']}" class="form-control">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">客户购房意向</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <textarea name="intention" rows="10" cols="100">
+                          {$client_edit['intention']}
+                        </textarea>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">客户负责人信息</label>
+                    <div class="col-sm-9 col-xs-12">
+                         <select name="staff" style="height:32px">
+                       {loop $stf $it}
+                         <option value="{$it['id']}" {if $client_edit['broker_id'] == $it['id']} selected="selected" {/if}>姓名:{$it['name']}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;电话:{$it['phone']}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;站点名称：{$it['site']['name']}</option>
+                         
+                         {/loop}
+                       </select><span style="color: red;font-size: 20px">(←&nbsp;此为分配给公司内部人员)</span>
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="{$client_edit['id']}">
+                <input type="hidden" name="staff_id" value="{$client_edit['broker_id']}">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐人信息</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="pusher" style="height:32px">
+                       {loop $pusher $item}
+                         <option value="{$item['id']}" {if $client_edit['recommon_id'] == $item['id']} selected="selected" {/if}>姓名:{$item['realname']}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;电话:{$item['mobile']}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;身份证号:{$item['Idcard']}</option>
+                         
+                         {/loop}
+                       </select>
+                    </div>
+                <div class="form-group" style="margin-top: 50px">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <input name="submit" type="submit" value="保存修改" class="btn btn-primary btn-block">
+                        <input type="hidden" name="token" value="85616f84">
+                    </div>
+                </div>
+        
+            </div>
+      
+    
+        </div>
+    </form>
+</div>
+</div>

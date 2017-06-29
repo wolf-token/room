@@ -1,0 +1,91 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li {if $operation == 'list'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'list'));}">经纪人列表</a></li>
+     <li  {if $operation == 'edit'} class="active" {/if}><a>修改经纪人信息</a></li>
+   <li {if $operation == 'client'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'client'));}">客户列表</a></li>
+</ul>
+<div class="main">
+<div class="alert alert-info">
+        <h4>
+            <i class="fa fa-info-circle"></i>
+            说明: 升级授权权限仅限二级经纪人升一级时起到限制作用！（未授权代表禁止二级经纪人升为一级）<br>
+        </h4>
+    </div>
+	<div class="clearfix">    
+    <form id="theform" class="form form-horizontal" action="./index.php?c=site&a=entry&op=update&do=brokerlist&m=iw_house" method="post">
+      <input type="hidden" name="id" value="{$economy_edit['id']}">
+      <input type="hidden" name="commission_id" value="{$economy_edit['comm']['id']}">
+ 	  <input type="hidden" name="rank_id" value="{$economy_edit['rank']['id']}">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                修改经纪人信息
+            </div>
+            <div class="panel-body">
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">经纪人姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" id="name" value="{$economy_edit['realname']}" class="form-control">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">手机号码</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="mobile" id="mobile" value="{$economy_edit['mobile']}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">身份证号</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="number" name="Idcard" id="Idcard" value="{$economy_edit['Idcard']}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">等级</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="rank" style="height:32px">
+                         <option value="1" {if $economy_edit['rank']['type'] == 1} selected="selected" {/if}>一等级</option>
+                         <option value="2" {if $economy_edit['rank']['type'] == 2} selected="selected" {/if}>二等级</option>
+                         <option value="3" {if $economy_edit['rank']['type'] == 3} selected="selected" {/if}>三等级</option>
+                       </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">升级授权</label>
+                    <div class="col-sm-9 col-xs-12" style="position: relative;top: 3px;margin-left: 5px">
+                      
+                         <input type="radio" name="accredit" value="0" {if $economy_edit['accredit'] == 0} checked {/if} />&nbsp;&nbsp;已授权
+                         &nbsp;&nbsp;<input type="radio" name="accredit" value="1 " {if $economy_edit['accredit'] == 1} checked {/if} />&nbsp;&nbsp;未授权
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">佣金</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="money" id="money" value="{$economy_edit['comm']['money']}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">用户类型</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="type" style="height:32px">
+                         <option value="0" {if $economy_edit['type'] == 0} selected="selected" {/if}>普通用户</option>
+                         <option value="1" {if $economy_edit['type'] == 1} selected="selected" {/if}>经纪人</option>
+                       </select>
+                    </div>
+                <div class="form-group" style="margin-top: 50px">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <input name="submit" type="submit" value="保存" class="btn btn-primary btn-block">
+                        <input type="hidden" name="token" value="85616f84">
+                    </div>
+                </div>
+        
+            </div>
+      
+    
+        </div>
+    </form>
+</div>
+</div>

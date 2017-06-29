@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>佣金详情</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<style type="text/css">
+		body{
+
+			background: #F2F2F2;
+		}
+	</style>
+</head>
+<body>
+	<div width="100%">
+
+		<table width="100%" style="margin: 0 auto">
+
+			<tr>
+				<td rowspan="2" style="width: 20%">
+				{if $share1['avatar'] == ""}
+				<img height="30%" src="/addons/iw_house/template/mobile/images/head.jpg">
+			{else}
+				<img width="100%" src="{$share1['avatar']}">
+			
+			{/if}
+				
+				</td>
+				<td style="color: #5E5E5E;font-size: 20px;font-weight: bold;"><img width="10%" src="/addons/iw_house/template/mobile/images/11.png">&nbsp;<span style="position: relative;top: -5px">姓名：{$share1['realname']}</span></td>
+			</tr>
+			<tr>
+				<td style="color: #5E5E5E;font-size: 20px;font-weight: bold;"><img width="10%" src="/addons/iw_house/template/mobile/images/12.png">&nbsp;<span style="line-height: 30px;position: relative;top: -5px">电话：{$share1['mobile']}</span></td>
+			</tr>
+
+
+		</table>
+	</div>
+	&nbsp;
+	<hr style="border:1px dashed #ccc">
+	<table id="ta" cellspacing=0 style="border:0px solid red;width: 100%;height:auto;">
+	<style type="text/css">
+	.td{
+		border-bottom:1px solid #ccc;text-align: center;line-height: 40px;padding-top: 10px;
+	}.th{
+		border-bottom:1px solid #ccc;text-align: center;
+	}
+	a{
+		text-decoration: none;color: #DD4E42  ;
+	}
+	</style>
+		<tr >
+			<td class='th'>我的佣金</td>
+			<td class='th'>分销佣金</td>
+			<td class='th'>推荐房源佣金</td>
+			<td class='th'>到账时间</td>
+			<!-- <td class='th'>删除记录</td> -->
+		</tr>
+		{loop $yjins $yjin}
+		<tr >
+			<td class='td' style='width: 20%'>￥{$yjin['myself']}</td>
+			<td class='td'  style='width: 20%'>￥{$yjin['rank_money']}</td>
+			<td class='td'  style='width: 20%'>￥{$yjin['room']}</td>
+			<td class='td' style='width: 40%;font-size: 10px;color: green'>{$yjin['time']}</td>
+			<!-- <td class='td' style='width: 25%;'><a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'delrc','id'=>$yjin['id']))}">✘</a></td> -->
+		</tr >
+		{/loop}
+<script type="text/javascript" src='../addons/'></script>
+<script type="text/javascript">
+
+</script>
+	</table>
+</body>
+</html>

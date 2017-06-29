@@ -1,0 +1,92 @@
+
+<style>
+	.nav-bottomll{
+		/*margin-top:50px;*/
+		width: 100%;
+		height: 50px;
+		background-color:#9C2B19;
+		z-index:999;
+		padding-top:2%;
+		position:fixed;
+		 bottom:0;
+		 left:0;
+		_position:absolute;
+ 		_top: expression_r(documentElement.scrollTop + documentElement.clientHeight-this.offsetHeight); overflow:visible;
+	}
+	.nav-bottomll ul{
+		width: 100%;
+		height: 50px;
+		list-style: none;
+	}
+	.nav-bottomll li{
+		float: left;
+		width: 24.5%;
+		height: 50px;
+	}
+	/*.nav-bottom a{
+		position: 0 10%
+	}*/
+	/*.nav-bottom a {
+		padding-top:2%;
+	}*/
+	.nav-bottomll span{
+		display: block;
+		width: 33%;
+		color: #fff;
+		margin-left: 31%;
+		text-align:center;
+		font-size:12px;
+	}
+	.nav-bottomll img{
+		width: 100%;
+		height: 100%;
+	}
+	*{
+		margin: 0;
+		padding: 0;
+	}
+</style>
+<div class="nav-bottomll">
+	<ul>
+		<li>
+			<a href="{php echo $this->createMobileUrl('home',array('op'=>'room'))}">
+			<span style="height:25px;">
+				<img src="../addons/iw_house/template/mobile/images/indexl.png">
+			</span>
+			<span>
+				房源
+			</span>
+			</a>
+		</li>
+		<li>
+			<a href="http://wx.yichujilian.com/app/index.php?i=12&c=entry&m=haoman_bigwheel&do=index&rid=107">
+			<span style="height:25px;">
+				<img src="/addons/iw_house/template/mobile/images/recover.png">
+			</span>
+			<span>
+				抽奖
+			</span>
+			</a>
+		</li>
+		<li>
+			<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'info'))}">
+			<span style="height:25px;">
+				<img src="/addons/iw_house/template/mobile/images/mine.png">
+			</span>
+			<span>
+				我的
+			</span>
+			</a>
+		</li>
+		<li>
+			<a href="http://wx.yichujilian.com/app/index.php?i=12&c=home&t=27">
+			<span style="height:25px;">
+				<img src="/addons/iw_house/template/mobile/images/icon.png">
+			</span>
+			<span>
+				乐居
+			</span>
+			</a>
+		</li>
+	</ul>
+</div>

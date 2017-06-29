@@ -1,0 +1,73 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'list'));}">站点列表</a></li>
+      <li class="active"><a>站点修改信息</a></li>
+     <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'add'));}">站点添加</a></li>
+     <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'staff'));}">员工信息</a></li>
+      <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'staff_add'));}">添加员工信息</a></li>
+
+</ul>
+<div class="main">
+	<div class="clearfix">    
+    <form id="theform" class="form form-horizontal" action="./index.php?c=site&a=entry&op=update&do=stationlist&m=iw_house" method="post">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               修改站点信息
+            </div>
+            <div class="panel-body">
+                <input type="hidden" name="id" value="{$station_edit['id']}">
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">站点名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" id="person_name" value="{$station_edit['name']}" class="form-control">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">站点联系电话</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="tell" name="cell" maxlength="20" value="{$station_edit['cell']}" class="form-control">
+                    </div>
+                </div>
+              <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">站点负责人姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="username" name="username" value="{$station_edit['username']}" class="form-control">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">站点负责人电话</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="tell" name="phone" maxlength="11" value="{$station_edit['phone']}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">站点地址</label>
+                    <div class="col-sm-9 col-xs-12">
+                        
+                       省：&nbsp;&nbsp; <input type="text" name="province" value="{$station_edit['province']}" style="width: 100px;border-radius: 5px;height:35px;border:1px solid #CCCCCC">&nbsp;&nbsp;
+                        市：&nbsp;&nbsp; <input type="text" name="city" value="{$station_edit['city']}" style="width: 100px;border-radius: 5px;height:35px;border:1px solid #CCCCCC">&nbsp;&nbsp;
+                        县/区：&nbsp;&nbsp; <input type="text" name="county" value="{$station_edit['county']}" style="width: 100px;border-radius: 5px;height:35px;border:1px solid #CCCCCC">&nbsp;&nbsp;
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">店面效果图</label>
+                    <div class="col-sm-9 col-xs-12">
+                        
+                     {php echo tpl_form_field_image('pictures',$station_edit['pictures']);}        
+                    </div>
+                 </div>
+                <div class="form-group" style="margin-top: 50px">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <input name="submit" type="submit" value="保存" class="btn btn-primary btn-block">
+                        <input type="hidden" name="token" value="85616f84">
+                    </div>
+                </div>
+        
+            </div>
+      
+    
+        </div>
+    </form>
+</div>
+</div>

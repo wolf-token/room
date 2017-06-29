@@ -1,0 +1,99 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li {if $operation == 'rule'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rule'));}">规则设置</a></li>
+    <li {if $operation == 'rank'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank'));}">等级设置</a></li>
+     <li class="active"><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'assign'));}">分配金额设置</a></li>
+      <!--  <li {if $operation == 'agreement'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'agreement'));}">用户服务协议设置</a></li> -->
+</ul>
+<div class="main">
+      <div class="panel panel-default">
+            <div class="panel-heading">
+                分配金额信息
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs" id="myTab">
+                     <li {if $operation == 'assign'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'assign'));}">分配金额规则信息</a></li>
+                    <li {if $operation == 'assign_add'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'assign_add'));}">分配金额规则设置</a></li>
+                </ul>
+                  <form action="./index.php?c=site&a=entry&op=assign_add&do=systemlist&m=iw_house" method="post">
+                <div class="tab-content">
+                  <div class="form-group" style="padding-top: 30px">
+                              <label class="col-xs-12 col-sm-3 col-md-2 control-label">经纪人推荐房源佣金标准</label>
+                              <div class="col-sm-9">
+                               <input type="number" name="private" value="">
+                               <span>&nbsp;&nbsp;元/㎡&nbsp;&nbsp;&nbsp;</span>
+                               <span style="color: red;font-size: 20px">(此处提佣不分级别，按**元/平米提佣)</span>
+                              </div>
+                    </div>
+                   <div class="alert alert-info" style="margin-top: 60px">
+                      <h4>
+                          <i class="fa fa-info-circle"></i>
+                          说明: 此处为经纪人自己推荐的客户购买房源后的返现金额设置<br>
+                      </h4>
+                      <p style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;请仔细阅读说明在填写！</p>
+                  </div>
+                <div class="tab-pane  active" id="tab_basic">
+                
+                        <div class="form-group" style="padding-top: 30px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">一级经纪人返现金额</label>
+                            <div class="col-sm-9">
+                             <input type="number" name="rank_one" value=""><span>&nbsp;&nbsp;元&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                        </div>
+                        <div class="form-group" style="padding-top: 50px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">二级经纪人返现金额</label>
+                            <div class="col-sm-9">
+                             <input type="number" name="rank_two" value=""><span>&nbsp;&nbsp;元&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                        </div>
+                         <div class="form-group" style="padding-top: 50px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">三级经纪人返现金额</label>
+                            <div class="col-sm-9">
+                             <input type="number" name="rank_three" value=""><span>&nbsp;&nbsp;元&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                        </div>
+                         <div class="alert alert-info" style="margin-top: 100px">
+                          <h4>
+                              <i class="fa fa-info-circle"></i>
+                              说明: 此处为团队中经纪人推荐的客户购买房源后的返现金额设置<br>
+                          </h4>
+                          <p style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;请仔细阅读说明在填写！</p>
+                      </div>
+                      <div class="form-group" style="padding-top: 30px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">一级经纪人返现金额</label>
+                            <div class="col-sm-9">
+                             <input type="number" name="assign_one" value=""><span>&nbsp;&nbsp;元&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                        </div>
+                        <div class="form-group" style="padding-top: 50px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">二级经纪人返现金额</label>
+                            <div class="col-sm-9">
+                             <input type="number" name="assign_two" value=""><span>&nbsp;&nbsp;元&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                        </div>
+                         <div class="form-group" style="padding-top: 50px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">三级经纪人返现金额</label>
+                            <div class="col-sm-9">
+                             <input type="number" name="assign_three" value=""><span>&nbsp;&nbsp;元&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                        </div>
+                       <div class="form-group" style="padding-top: 50px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">规则说明</label>
+                            <div class="col-sm-9">
+                             {php echo tpl_ueditor('content');}
+                            </div>
+                        </div>
+                           <div class="form-group" style="position: relative;bottom: -10px">
+                                <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                                <div class="col-md-2 col-lg-1">
+                                    <input name="submit" type="submit" value="保存" class="btn btn-primary btn-block">
+                                    <input type="hidden" name="token" value="85616f84">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+ </div>  

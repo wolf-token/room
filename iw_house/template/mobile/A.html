@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			html,
+			body,
+			div,
+			span,
+			applet,
+			object,
+			iframe,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			p,
+			blockquote,
+			pre,
+			a,
+			abbr,
+			acronym,
+			address,
+			big,
+			cite,
+			code,
+			del,
+			dfn,
+			em,
+			font,
+			img,
+			ins,
+			kbd,
+			q,
+			s,
+			samp,
+			small,
+			strike,
+			strong,
+			sub,
+			sup,
+			tt,
+			var,
+			b,
+			u,
+			i,
+			center,
+			dl,
+			dt,
+			dd,
+			ol,
+			ul,
+			li,
+			fieldset,
+			form,
+			label,
+			legend,
+			table,
+			caption,
+			tbody,
+			tfoot,
+			thead,
+			tr,
+			th,
+			td {
+				margin: 0;
+				padding: 0;
+				border: 0;
+				outline: 0;
+				font-size: 100%;
+				vertical-align: baseline;
+				background: transparent;
+			}
+
+			body {
+				line-height: 1;
+			}
+
+			ol,
+			ul {
+				list-style: none;
+			}
+
+			blockquote,
+			q {
+				quotes: none;
+			}
+
+			blockquote:before,
+			blockquote:after,
+			q:before,
+			q:after {
+				content: '';
+				content: none;
+			}
+			/* remember to define focus styles! */
+
+			:focus {
+				outline: 0;
+			}
+			/* remember to highlight inserts somehow! */
+
+			ins {
+				text-decoration: none;
+			}
+
+			del {
+				text-decoration: line-through;
+			}
+			/* tables still need 'cellspacing="0"' in the markup */
+
+			table {
+				border-collapse: collapse;
+				border-spacing: 0;
+			}
+
+			.ft {
+				float: left;
+			}
+
+			.fu {
+				float: right;
+			}
+
+			.nof {
+				float: none;
+				display: inline-block;
+			}
+
+			.heidss {
+				width: 100%;
+				height: 100px;
+				/*border: 1px solid red;*/
+			}
+
+			.heidss li {
+				float: left;
+				height: 100px;
+				font-family: "微软雅黑";
+				/*color: #fff;*/
+				line-height: 100px;
+				font-size: 40px;
+				text-align: center;
+			}
+
+			.banner-guild {
+				width: 100%;
+				height: 370px;
+				/*border: 1px solid red;*/
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.banner-fen {
+				width: 45%;
+				height: 300px;
+				/*background: #005F9F;*/
+				float: left;
+				padding: 2% 1%;
+				border: 5px solid #A9D28E;
+				margin-top: 2%;
+				margin-left: 1%;
+			}
+
+			.banner-fen li {
+				float: left;
+
+			}
+
+			.fen-img {
+				width: 30%;
+				height: 300px;
+			}
+
+			.fen-ziti {
+				width: 69%;
+				height: 300px;
+				font-family: "楷体";
+				/*color: #fff;*/
+				/*line-height: 100px;*/
+				font-size: 40px;
+				margin: 3% 0;
+			}
+			.banner-guild p{
+				margin: 5% 0;
+			}
+			.liebiao{
+				width: 100%;
+				height: 350px;
+				/*border: 1px solid red;*/
+				padding: 2% 4%;
+				border-bottom: 35px solid #fff9f9;
+			}
+				.liebiao-img {
+				width: 40%;
+				height: 340px;
+			}
+
+			.liebiao-ziti {
+				width: 58%;
+				height: 300px;
+				font-family: "楷体";
+				/*color: #fff;*/
+				/*line-height: 100px;*/
+				font-size: 40px;
+				margin: 3% 0;
+			}
+			.liebiao-ziti p{
+				margin: 3% 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="">
+			<ul class="heidss">
+				<li style="width: 30%; margin-left: 3%;">地区</li>
+				<li style="width: 30%;">房型</li>
+				<li style="width: 20%;margin-left: 3%;">装修等级</li>
+				<li style="width: 10%;height:100px;"><img src="img/下拉.png"></li>
+			</ul>
+		</div>
+
+		<div class="banner-guild">
+			<div class="banner-fen">
+				<ul>
+					<li class="fen-img">
+						<img src="img/16.png">
+					</li>
+					<li class="fen-ziti">
+						<p><b>名称:</b><span>1212312</span></p>
+						<p><b>面积:</b><span>1212312</span></p>
+						<p><b>格局:</b><span>1212312</span></p>
+						<p><b>位置:</b><span>1212312</span></p>
+					</li>
+				</ul>
+			</div>
+			<div class="banner-fen">
+				<ul>
+					<li class="fen-img ">
+						<img src="img/16.png">
+					</li class="fen-ziti">
+					<li class="fen-ziti">
+						<p><b>名称:</b><span>1212312</span></p>
+						<p><b>面积:</b><span>1212312</span></p>
+						<p><b>格局:</b><span>1212312</span></p>
+						<p><b>位置:</b><span>1212312</span></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="liebiao">
+			<ul>
+				<li class="liebiao-img ft">
+					<img src="img/16.png">
+				</li>
+				<li class="ft liebiao-ziti">
+					<p><b>名称:</b><span>1212312</span></p>
+					<p><b>面积:</b><span>1212312</span></p>
+					<p><b>格局:</b><span>1212312</span></p>
+					<p><b>位置:</b><span>1212312</span></p>
+				</li>
+			</ul>
+		</div>
+		<div class="liebiao">
+			<ul>
+				<li class="liebiao-img ft">
+					<img src="img/16.png">
+				</li>
+				<li class="ft liebiao-ziti">
+					<p><b>名称:</b><span>1212312</span></p>
+					<p><b>面积:</b><span>1212312</span></p>
+					<p><b>格局:</b><span>1212312</span></p>
+					<p><b>位置:</b><span>1212312</span></p>
+				</li>
+			</ul>
+		</div>
+		<div class="liebiao">
+			<ul>
+				<li class="liebiao-img ft">
+					<img src="img/16.png">
+				</li>
+				<li class="ft liebiao-ziti">
+					<p><b>名称:</b><span>1212312</span></p>
+					<p><b>面积:</b><span>1212312</span></p>
+					<p><b>格局:</b><span>1212312</span></p>
+					<p><b>位置:</b><span>1212312</span></p>
+				</li>
+			</ul>
+		</div>
+	</body>
+
+</html>

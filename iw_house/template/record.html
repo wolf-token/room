@@ -1,0 +1,92 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li {if $operation == 'list'} class="active" {/if}><a href="{php echo  $this->createWebUrl('record', array('op'=>'list'));}">经纪人分配佣金信息记录表列表</a></li>
+</ul>
+<div class="main">
+  <div class="panel panel-info">
+      <div class="panel-heading">快速搜索</div>
+      <div class="panel-body">
+        <form action="./index.php" method="post" class="form-horizontal" role="form">
+          <input type="hidden" name="c" value="site" />
+          <input type="hidden" name="a" value="entry" />
+          <input type="hidden" name="m" value="iw_house" />
+          <input type="hidden" name="do" value="record" />
+          <input type="hidden" name="op" value="list" />
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label" style="width: 120px">经纪人信息</label>
+            <div class="col-sm-8 col-lg-9"  style="width: 410px">
+            
+                <select name="staff" style="width: 300px;height: 40px;border-radius: 5px">
+                 {loop $users $it}
+                  <option value="{$it['id']}" {if $it['id'] == $sta && $sta !=''} selected {/if}>姓名:{$it['realname']}&nbsp;&nbsp;电话：{$it['mobile']}</option>
+                  {/loop}
+                </select>
+
+            </div>
+            <div class=" col-xs-12 col-sm-2 col-lg-2">
+              <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+            </div>
+          </div>
+          <div class="form-group">
+          </div>
+        </form>
+      </div>
+  
+    </div>
+    <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:8%;">微信昵称</th>
+                        <th style="width:6%;">头像</th>
+                        <th style="width:6%;">真实姓名</th>
+                        <th style="width:7%;">电话</th>
+                        <th style="width:7%;">等级</th>
+                         <th style="width:15%;">下线推荐用户购房所分配佣金数</th>        
+                         <th style="width:15%;">自己推荐房源所分配佣金数</th>        
+                        <th style="width:15%;">自己推荐用户购房所分配佣金数</th>  
+                        <th style="width:7%;">佣金总数</th>
+                        <th style="width:11%;">分配时间</th>
+                        <th style="width:11%;">操作</th>
+                       
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $record $item}
+                    <tr>
+                        <td>{$item['cust']['nickname']}</td>
+                        <td> {if $item['cust']['avatar'] != ""}            
+            <img style="width:40px; height:40px;" src="{$item['cust']['avatar']}">
+            {else}
+              <span><img style="width:40px; height:40px;" src="/attachment/images/3/2016/12/logo.jpg"></span>
+            {/if}</td>
+                        <td>{$item['cust']['realname']}</td>
+                        <td>{$item['cust']['mobile']}</td>
+                        <td>{if $item['cust']['rank']['type'] ==1}
+                                一级经纪人
+                            {elseif $item['cust']['rank']['type'] ==2}
+                            二级经纪人
+                            {elseif $item['cust']['rank']['type'] ==3}
+                            三级经纪人
+                            {/if}
+                        </td> 
+                        <td>{$item['rank_money']}&nbsp;&nbsp;元</td>
+                        <td>{$item['room']}&nbsp;&nbsp;元</td>
+                        <td>{$item['myself']}&nbsp;&nbsp;元</td>
+                        <td>{$item['cust']['comm']['money']}&nbsp;&nbsp;元</td>
+                        <td>{$item['time']}</td>
+                        <td>
+                       		<a class="btn btn-danger btn-sm" href="{php echo  $this->createWebUrl('record', array('op'=>'delete','id'=>$item['id']));}" title="删除记录信息" onclick="return confirm('此操作不可恢复，确认删除？');return false;"><i class="fa fa-times"></i></a>
+                        </td>
+                      	
+                       
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager}
+            </div>
+        </div>
+    </form>
+</div>

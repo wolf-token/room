@@ -1,0 +1,282 @@
+{template 'common/header'}
+<style type="text/css">
+  .col-sm-9{
+    padding-top:7px;
+  }
+</style>
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'list'));}">房源列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'add'));}">房源添加</a></li>
+     <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'contact'));}">房源联系人信息</a></li>
+     <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'recle'));}">已交易房源信息</a></li>
+   <li class="active"><a>房源详情</a></li>
+</ul>
+<div class="main">
+  <div class="clearfix">
+    <div class="form form-horizontal">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               房源详情
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$room_details['name']}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源面积</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$room_details['area']}&nbsp;&nbsp;㎡
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源格局</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$room_details['pat']['name']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源总价</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$room_details['price']}&nbsp;&nbsp;万
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源平均价格</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$room_details['average']}&nbsp;&nbsp;元/㎡
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源展示类型</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {if $room_details['mold'] == 0}
+                              <span style="color:red">普通类型</span>
+                            {elseif $room_details['mold']== 1}
+                              <span style="color:orange">推荐类型</span>
+                            {/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房东姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$person['name']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房东手机号</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {$person['cell']}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐人</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {$choose['realname']}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">负责此房源的员工信息</label>
+                    <div class="col-sm-9 col-xs-12">
+                        姓名：{$room_details['staff']['name']}&nbsp;&nbsp;|&nbsp;&nbsp;电话：{$room_details['staff']['phone']}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工所属站点名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {$room_details['station']['name']}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">新房源状态</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {if $room_details['status'] == 0}
+                              <span style="color:red">未定房</span>
+                            {elseif $room_details['status']== 1}
+                              <span style="color:orange">定房</span>
+                            {/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">装修等级</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {if $room_details['decorate'] == 0}
+                              <span style="color:red">简装</span>
+                            {elseif $room_details['decorate']== 1}
+                              <span style="color:green">精装</span>
+                              {elseif $room_details['decorate']== 2}
+                              <span style="color:green">豪装</span>
+                              {elseif $room_details['decorate']== 3}
+                              <span style="color:red">未装修</span>
+                            {/if}
+                    </div>
+                </div>
+                {if $room_details['status'] == 1 && $customer != ''}
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">购买人信息</label>
+                    <div class="col-sm-9 col-xs-12">
+                         <span style="color:green">姓名：{$customer['name']}&nbsp;&nbsp;|&nbsp;&nbsp;
+                         电话：{$customer['phone']}</span>
+                    </div>
+                </div>
+                {/if}
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源付款状态</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {if $room_details['pay_status'] == 0}
+                              <span style="color:red">未付款</span>
+                            {elseif $room_details['pay_status']== 1}
+                              <span style="color:orange">已付定金</span>
+                              {elseif $room_details['pay_status']== 2}
+                              <span style="color:green">已付首付</span>
+                              {elseif $room_details['pay_status']== 3}
+                              <span style="color:green">已付款</span>
+                            {/if}
+                    </div>
+
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">付款方式</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {if $room_details['pay_way'] == 1}
+                              <span style="color:green">现金</span>
+                            {elseif $room_details['pay_way']== 2}
+                              <span style="color:orange">刷卡</span>
+                              {elseif $room_details['pay_way']== 3}
+                              <span style="color:green">微信支付</span>
+                              {elseif $room_details['pay_way']== 4}
+                              <span style="color:blue">支付宝支付</span>
+                              {elseif $room_details['pay_way']== 0}
+                              <span style="color:red">房源还未交易</span>
+                            {/if}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分配总金额</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$room_details['money']}&nbsp;&nbsp;元
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">一级经纪人分配钱数</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$room_details['rank_one']}&nbsp;&nbsp;元
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">二级经纪人分配钱数</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$room_details['rank_two']}&nbsp;&nbsp;元
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">三级经纪人分配钱数</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$room_details['rank_three']}&nbsp;&nbsp;元
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">剩余分配钱数</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$room_details['residue_money']}&nbsp;&nbsp;元
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源主卧图</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <img src="/attachment/{$pictures['imguqcl']}" style="width:200px">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源客厅图</label>
+                    <div class="col-sm-9 col-xs-12">
+                     <img src="/attachment/{$pictures['living']}" style="width:200px">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源户型图</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <img src="/attachment/{$pictures['type']}" style="width:200px">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源交通图</label>
+                    <div class="col-sm-9 col-xs-12">
+                      <img src="/attachment/{$pictures['traffic']}" style="width:200px">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源其它展示图</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <img src="/attachment/{$pictures['other']}" style="width:200px">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源简介</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {php echo tpl_ueditor('content',$room_details['infomation']);}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源装修等级</label>
+                    <div class="col-sm-9 col-xs-12">
+
+                         {if $room_details['decorate'] == 0}
+                              <span style="color:red">简修</span>
+                            {elseif $room_details['decorate']== 1}
+                              <span style="color:orange">精修</span>
+                            {elseif $room_details['decorate']== 2}
+                              <span style="color:green">豪装</span>
+                              {elseif $room_details['decorate']== 3}
+                              <span style="color:red">未装修</span>
+                            {/if}
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源类型</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {if $room_details['type'] == 0}
+                              <span style="color:red">新房源</span>
+                            {elseif $room_details['type']== 1}
+                              <span style="color:green">二手房</span>
+                              {elseif $room_details['type']== 2}
+                              <span style="color:green">毛坯房</span>
+                            {/if}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源所在地区</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$too['name']}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源归属城市</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$room_details['cito']['city']}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源位置</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {$room_details['position']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">创建时间</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$room_details['time']}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源小区名</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$room_details['community']}
+                    </div>
+                </div>
+    </div>

@@ -1,0 +1,50 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('math', array('op'=>'list'));}">推荐人数规则列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('math', array('op'=>'add'));}">推荐人数规则添加</a></li>
+      <li><a href="{php echo  $this->createWebUrl('math', array('op'=>'tisment'));}">广告位信息</a></li>
+       <li><a href="{php echo  $this->createWebUrl('math', array('op'=>'tisment_add'));}">广告位信息添加</a></li>
+        <li class="active"><a href="{php echo  $this->createWebUrl('math', array('op'=>'tisment_edit'));}">广告位信息添加</a></li>
+</ul>
+<div class="clearfix"> 
+    <form id="theform" class="form form-horizontal" action="./index.php?c=site&a=entry&op=tisment_update&do=math&m=iw_house" method="post">
+	
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                广告位信息修改
+            </div>
+            <div class="panel-body">
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">广告位信息</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <textarea cols="50" rows="10" name="info">{$tisment_edit['info']}</textarea>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">服务热线</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <input type="tell" name="cell" value="{$tisment_edit['cell']}">
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="{$tisment_edit['id']}">
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">状态</label>
+                    <div class="col-sm-9 col-xs-12" style="position: relative;top:10px">
+                        <input type="radio" name="status" value="0" {if $tisment_edit['status'] == 0} checked {/if}>显示&nbsp;&nbsp;&nbsp;
+                         <input type="radio" name="status" value="1" {if $tisment_edit['status'] == 1} checked {/if}>隐藏
+                    </div>
+                </div>
+				 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <input name="submit" type="submit" value="保存" class="btn btn-primary btn-block">
+                        <input type="hidden" name="token" value="85616f84">
+                    </div>
+                </div>
+            </div>
+			
+        </div>
+    </form>
+</div>

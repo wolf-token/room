@@ -1,0 +1,108 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'list'));}">房源列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'add'));}">房源添加</a></li>
+     <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'contact'));}">房源联系人信息</a></li>
+   <li class="active"><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'recle'));}">已交易房源信息</a></li>
+</ul>
+<div class="main">
+ <div class="panel panel-info">
+      <div class="panel-heading">筛选</div>
+      <div class="panel-body">
+        <form action="./index.php" method="post" class="form-horizontal" role="form">
+          <input type="hidden" name="c" value="site" />
+          <input type="hidden" name="a" value="entry" />
+          <input type="hidden" name="m" value="iw_house" />
+          <input type="hidden" name="do" value="roomlist" />
+          <input type="hidden" name="op" value="recle" />
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+            <div class="col-sm-8 col-lg-9">
+              <input class="form-control" name="keyword" placeholder="房源位置/房源名称/房源面积/创建时间（格式:2016-11-12）/总价格/平均价格" type="text" value="">
+            </div>
+            <div class=" col-xs-12 col-sm-2 col-lg-2">
+              <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+            </div>
+          </div>
+          <div class="form-group">
+          </div>
+        </form>
+      </div>
+  
+    </div>
+    <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:8%;">ID</th>
+                        <th style="width:8%;">房源名称</th>
+                        <th style="width:6%;">房源面积</th>
+                        <th style="width:6%;">房源总价格</th>
+                        <th style="width:8%;">房源平均价格</th>
+                        <th style="width:6%;">房源格局</th>
+                        <th style="width:15%;text-align: center">房源展示图</th>
+                        <th style="width:7%;">房源装修等级</th>
+                        <th style="width:6%;">房源类型</th>
+                        <th style="width:10%;">房源归属城市</th>
+                        <th style="width:6%;">房东姓名</th>
+                        <th style="width:11%;">创建时间</th>
+                        <th style="width:11%;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $room_recle $item}
+                    <tr>
+                         <td>{$item['id']}</td>
+                         <td>{$item['name']}</td>
+                        <td>{$item['area']}&nbsp;&nbsp;㎡</td>
+                        <td>{$item['price']}&nbsp;&nbsp;万</td>
+                        <td>{$item['average']}&nbsp;&nbsp;元/㎡</td>
+                        <td>{$item['pattern']}</td>
+                        <td>
+
+                            <img style="width:40px; height:40px;" src="/attachment/{$item['img']['type']}">
+                            <img style="width:40px; height:40px;" src="/attachment/{$item['img']['living']}">
+                            <img style="width:40px; height:40px;" src="/attachment/{$item['img']['traffic']}">
+                            <img style="width:40px; height:40px;" src="/attachment/{$item['img']['other']}">
+                            <img style="width:40px; height:40px;" src="/attachment/{$item['img']['imguqcl']}">
+                            
+                        </td>
+                        <td>
+                             {if $item['decorate'] == 0}
+                              <span style="color:red">简修</span>
+                            {elseif $item['decorate']== 1}
+                              <span style="color:orange">精修</span>
+                            {elseif $item['decorate']== 2}
+                              <span style="color:green">豪装</span>
+                              {elseif $item['decorate']== 3}
+                              <span style="color:green">未装修</span>
+                            {/if}
+
+                        </td>
+                        <td>
+                            {if $item['type'] == 0}
+                              <span style="color:red">新房源</span>
+                            {elseif $item['type']== 1}
+                              <span style="color:green">二手房</span>
+                            {/if}
+                        </td>
+                       <td>{$item['stat']['city']}{$item['stat']['county']}</td>
+                       <td>{$item['person']['name']}</td>
+                       <td>{$item['time']}</td>
+
+                        <td style="text-align:left;">
+                            <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('roomlist', array('op'=>'recle_details','id'=>$item['id'],'pictures'=>$item['photo_id'],'person'=>$item['person_id']));}" title="详情">详情</a>
+                            <a class="btn btn-danger btn-sm" href="{php echo  $this->createWebUrl('roomlist', array('op'=>'recle_delete','pid'=>$item['id'],'pictures_id'=>$item['photo_id']));}" title="删除用户" onclick="return confirm('此操作不可恢复，确认删除？');return false;"><i class="fa fa-times"></i></a>
+                      </td>            
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager1}
+            </div>
+        </div>
+    </form>
+</div>

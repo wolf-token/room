@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>乐居—全民营销</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link href="/addons/iw_house/template/mobile/css/mui.min.css" rel="stylesheet" />
+
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.lunbo{
+				width: 100%;
+   				height: auto;
+    			border-top:15px solid #fff9f9;
+    			border-left: 15px solid #FFF9F9;
+    			border-right:15px solid #fff9f9;
+			}
+			.lunbo-img{
+				width: 100%;
+				/*height: 500px;*/
+			}
+			.lunbo-jie{
+				width:100%;
+   				height:40px;
+    			border-bottom:3px solid #ccc;
+    			border-left: 15px solid #FFF9F9;
+    			border-right:15px solid #fff9f9;
+    			font-family: "微软雅黑";
+    			font-size: 20px;
+    			font-weight: 600;
+    			margin-top: 5%;
+			}
+			body{
+				background: #FFF9F9;
+			}
+			.shouming-img{
+				float: left;
+				width:7%;
+				height: 25px;
+				margin-right: 2%;
+				/*border: 1px solid red;*/
+
+			}
+			.shouming-img img{
+				width:100%;
+				height: 100%;
+			}
+			.shouming-ziti{
+
+				float: left;
+				width:84%;
+				height: 30px;
+				/*border: 1px solid red;*/
+				font-family: "宋体";
+    			font-size: 16px;
+    			/*font-weight: 600;*/
+    			line-height: 30px;
+			}
+			ol,
+			ul {
+				list-style: none;
+			}
+			.xiangxi{
+				width: 100%;
+   				height: auto;
+   				margin-top:3%;
+    			/*border-top:40px solid #fff9f9;*/
+    			border-left: 15px solid #FFF9F9;
+    			border-right:15px solid #fff9f9;
+			}
+			.jianjiediv{
+				width: 100%;
+   				height: auto;
+    			border-top:15px solid #fff9f9;
+    			border-left: 15px solid #FFF9F9;
+    			border-right:15px solid #fff9f9;
+			}
+			.jianjie-ziti{
+				font-family: "宋体";
+    			font-size: 25px;
+    			font-weight: 600;
+    			line-height: 38px;
+    			width:100%;
+    			height: 39px;
+			}
+			.ziti-xiqing{
+				font-family: "宋体";
+    			/*font-weight: 600;*/
+    			/*line-height: 100px;*/
+    			width:100%;
+    			text-align:center;
+    			word-wrap:break-word;
+				word-break:break-all;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="lunbo">
+			<div class="lunbo-img">
+				<!-- <div class="mui-slider banner-bner">
+			<div class="mui-slider-group mui-slider-loop">
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#"><img src="/attachment/{$single['pictures']['imguqcl']}" /></a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="/attachment/{$single['pictures']['living']}" /></a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="/attachment/{$single['pictures']['type']}" /></a>
+				</div>
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#"><img src="/attachment/{$single['pictures']['other']}" /></a>
+				</div>
+			</div> -->
+			
+			<div class="mui-slider banner-bner">
+			<div class="mui-slider-group mui-slider-loop">
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#"><img src="/attachment/{$single['pictures']['other']}" /></a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="/attachment/{$single['pictures']['imguqcl']}" /></a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="/attachment/{$single['pictures']['living']}" /></a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="/attachment/{$single['pictures']['type']}" /></a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="/attachment/{$single['pictures']['other']}" /></a>
+				</div>
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#"><img src="/attachment/{$single['pictures']['imguqcl']}" /></a>
+				</div>
+			</div>
+
+			<div class="mui-slider-indicator">
+				<div class="mui-indicator mui-active"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+			</div>
+		</div>
+	</div>
+		</div>
+		<div class="lunbo-jie">
+				<span style="color:#3C3C3C;margin-right:20%;">{$single['community']}</span><span style="color:red;">{$single['price']}</span>
+		</div>
+		<div class="xiangxi">
+			<ul>
+				<li class="ft shouming-img"><img src="/addons/iw_house/template/mobile/images/chance.png"></li>
+				<li class="ft shouming-ziti"><span><b>名称:</b>{$single['name']}</span></li>
+			</ul>
+			<ul>
+				<li class="ft shouming-img"><img src="/addons/iw_house/template/mobile/images/pattern.png"></li>
+				<li class="ft shouming-ziti"><span><b>格局:</b>{$single['pat']['name']}</span></li>
+			</ul>
+			<ul>
+				<li class="ft shouming-img"><img src="/addons/iw_house/template/mobile/images/position.png"></li>
+				<li class="ft shouming-ziti"><span><b>位置:</b>{$single['position']}</span></li>
+			</ul>
+			<ul>
+				<li class="ft shouming-img"><img src="/addons/iw_house/template/mobile/images/price.png"></li>
+				<li class="ft shouming-ziti"><span><b>平米价格:</b>{$single['average']}元/㎡</span></li>
+			</ul>
+			<ul>
+				<li class="ft shouming-img"><img src="/addons/iw_house/template/mobile/images/pay.png"></li>
+				<li class="ft shouming-ziti"><span><b>付款方式:</b>
+				{if $single['pay_way'] == 0}
+					未交易
+				{elseif $single['pay_way'] == 1}
+					现金
+				{elseif $single['pay_way'] == 2}
+					刷卡
+				{elseif $single['pay_way'] == 3}
+					微信支付
+				{elseif $single['pay_way'] == 4}
+					支付宝支付
+				{/if}
+				</span></li>
+			</ul>
+			<div style="clear: both;"></div>
+		</div>
+		<div class="jianjiediv">
+				<ul>
+					<li class="jianjie-ziti">住宅简介</li>
+					<li style="border: 2px solid #ccc;"></li>
+					<li class="ziti-xiqing" style="text-indent:2em;">
+					{$single['infomation']}
+
+					</li>
+
+				</ul>
+			</div>
+			<div style="width: 100%;height: 60px"></div>
+	
+<!-- <lin href="/addons/iw_house/template/mobile/js/mui.js" rel="stylesheet" /> -->
+<script src="/addons/iw_house/template/mobile/js/mui.js"></script>
+		<script>
+				mui.init();
+				mui.plusReady(function() {
+			var gallery = mui('.mui-slider');
+			gallery.slider({
+				interval: 5000
+			});
+		});
+		mui.init({
+				swipeBack:true
+			});
+
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,79 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'list'));}">站点列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'add'));}">站点添加</a></li>
+     <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'staff'));}">员工信息</a></li>
+      <li class="active"><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'staff_add'));}">添加员工信息</a></li>
+
+</ul>
+<div class="main">
+	<div class="clearfix">    
+    <form id="theform" class="form form-horizontal" action="./index.php?c=site&a=entry&op=staff_add&do=stationlist&m=iw_house" method="post">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               添加员工信息
+            </div>
+            <div class="panel-body">
+                
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" id="person_name" value="" class="form-control">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">联系电话</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="tell" name="cell" maxlength="11" value="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">职位</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="radio" name="title" style="width: 50px;border-radius: 5px;height:15px;border:1px solid #CCCCCC;" value="0" checked><span style="font-size: 15px">总经理</span>
+                        <input type="radio" name="title" style="width: 50px;border-radius: 5px;height:15px;border:1px solid #CCCCCC;" value="1" checked><span style="font-size: 15px">销售总监</span>
+                        <input type="radio" name="title" style="width: 50px;border-radius: 5px;height:15px;border:1px solid #CCCCCC;" value="2" checked><span style="font-size: 15px">财务总监</span>
+                        <input type="radio" name="title" style="width: 50px;border-radius: 5px;height:15px;border:1px solid #CCCCCC;" value="3" ><span style="font-size: 15px">销售经理/店长</span>
+                        <input type="radio" name="title" style="width: 50px;border-radius: 5px;height:15px;border:1px solid #CCCCCC;" value="4" ><span style="font-size: 15px">置业顾问</span>&nbsp;&nbsp;
+                        <span style="font-size: 20px;color:red">（←此处请依照公司实际情况进行选择）</span>
+                    </div>
+                </div>
+              <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">性别</label>
+                    <div class="col-sm-9 col-xs-12">
+	                   <input type="radio" name="sex" style="width: 50px;border-radius: 5px;height:15px;border:1px solid #CCCCCC;" value="0" ><span style="font-size: 15px">女</span>
+                        <input type="radio" name="sex" style="width: 50px;border-radius: 5px;height:15px;border:1px solid #CCCCCC;" value="1" ><span style="font-size: 15px">男</span>
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工照片</label>
+                    <div class="col-sm-9 col-xs-12">
+                        
+                       {php echo tpl_form_field_image('living');}         
+                    </div>
+                 </div>
+                  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工所属站点</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="station" style="width: 500px;border-radius: 5px;height:35px;border:1px solid #CCCCCC">
+                       {loop $staff_add $item}
+                       		<option value="{$item['id']}">站点名称：{$item['name']}&nbsp;&nbsp;|&nbsp;&nbsp;电话：{$item['cell']}&nbsp;&nbsp;|&nbsp;&nbsp;负责人：{$item['username']}</option>
+                       {/loop}
+                       </select>    
+                    </div>
+                 </div>
+                <div class="form-group" style="margin-top: 50px">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <input name="submit" type="submit" value="保存" class="btn btn-primary btn-block">
+                        <input type="hidden" name="token" value="85616f84">
+                    </div>
+                </div>
+        
+            </div>
+      
+    
+        </div>
+    </form>
+</div>
+</div>

@@ -1,0 +1,148 @@
+{template 'common/header'}
+<style type="text/css">
+  .col-sm-9{
+    padding-top:7px;
+  }
+</style>
+<ul class="nav nav-tabs">
+      <li {if $operation == 'list'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'list'));}">经纪人列表</a></li>
+     <li  {if $operation == 'details'} class="active" {/if}><a>经纪人详情</a></li>
+     <li {if $operation == 'client'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'client'));}">客户列表</a></li>
+     <li {if $operation == 'client_details'} class="active" {/if}><a>客户信息详情</a></li>
+</ul>
+<div class="main">
+  <div class="clearfix">    
+    <div class="form form-horizontal">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               客户信息详情
+            </div>
+            <div class="panel-body">             
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">客户姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$client_details['name']}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">客户电话</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$client_details['phone']}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">客户购房意向描述</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$client_details['intention']}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">客户购房状态</label>
+                    <div class="col-sm-9 col-xs-12">
+                          {if $client_details['buy_status'] == 0}
+                          <span style="color:red">未购房</span>
+                        {elseif $client_details['buy_status']== 1}
+                          <span style="color:orange">已分配</span>
+                          {elseif $client_details['buy_status']== 2}
+                          <span style="color:orange">已定房</span>
+                          {elseif $client_details['buy_status']== 3}
+                          <span style="color:orange">已付首付</span>
+                           {elseif $client_details['buy_status']== 3}
+                          <span style="color:orange">已结款</span>
+                        {/if}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">客户购房数量</label>
+                    <div class="col-sm-9 col-xs-12">
+                         <span>{$client_details['math']}&nbsp;&nbsp;套</span>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">客户负责人姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                          {if $client_details['brokername'] == ''}
+                              <span style="color: red;">无人负责</span>
+                          {else}
+                            {$client_details['brokername']}
+                          {/if}
+                          &nbsp;&nbsp;
+                          <span style="color: red;font-size: 20px">(此为分配给公司内部人员)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐人姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {$users['realname']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐人等级</label>
+                    <div class="col-sm-9 col-xs-12">
+
+                         {if $rank['type'] == 1}
+                          <span style="color:red">一等级</span>
+                        {elseif $rank['type']== 2}
+                          <span style="color:orange">二等级</span>
+                        {elseif $rank['type']== 3}
+                          <span style="color:green">三等级</span>
+                        {/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐时间</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$client_details['time']}
+                    </div>
+                </div>
+                    <div class="alert alert-info">
+        <h4 style="color:green">
+            <i class="fa fa-info-circle"></i>
+           此客户购买的房源信息列表<br>
+        </h4>
+    </div>
+     <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:15%;">房源名称</th>
+                        <th style="width:10%;">房源面积</th>          
+                        <th style="width:10%;">房源价格</th>          
+                        <th style="width:15%;">房源推荐人姓名</th>          
+                        <th style="width:15%;">房源推荐人电话</th>          
+                        <th style="width:15%;">房源所在位置</th>          
+                        <th style="width:15%;">房源小区名</th>          
+                        <th style="width:15%;">房源分配总佣金数值</th>          
+                        <th style="width:15%;">房源一级代理分配钱数</th>          
+                        <th style="width:15%;">房源二级代理分配钱数</th>          
+                        <th style="width:15%;">房源三级代理分配钱数</th>          
+                        <th style="width:18%;">添加时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $person $it}
+                    <tr>
+                        <td>{$it['name']}</td>
+                        <td>{$it['area']}&nbsp;㎡</td>
+                        <td>{$it['price']}&nbsp;万</td>
+                        <td>{$it['users']['realname']}</td>
+                        <td>{$it['users']['mobile']}</td>
+                        <td>{$it['position']}</td>
+                        <td>{$it['community']}</td>
+                        <td>{$it['money']}&nbsp;元</td>
+                        <td>{$it['rank_one']}&nbsp;元</td>
+                        <td>{$it['rank_two']}&nbsp;元</td>
+                        <td>{$it['rank_three']}&nbsp;元</td>
+                        <td>{$it['time']}</td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager4}
+            </div>
+        </div>
+    </form>
+    </div>

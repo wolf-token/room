@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>我要推荐</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<style type="text/css">
+
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	body{
+		/*border: 1px solid red;*/
+		/*background: #F2F2F2;*/
+	}
+	div{
+		/*background: white;*/
+		/*width: 97%;*/
+		/*padding-left: 10px;*/
+	}
+	.ar{
+		padding: 10px 0px 10px 10px;
+	}
+	body{
+		font-family:"楷体";
+	}
+		li{
+			list-style: none;
+		}
+		span{
+			/*border:1px solid red;*/
+			 font-family:"楷体";
+			color: black;
+			font-size
+			font-size: 25px;
+			background: white;
+			padding: 5px;
+		}
+		a{
+			text-decoration:none;
+			color: black;
+		}
+		.a{
+			background: #A9D28E;
+			color: white;
+		}
+		td{
+			text-align: center;
+		}
+		.b{
+			background: white;
+			color: black;
+		}
+		.her-span{
+			width: 159px;
+    		height: 30px;
+    		margin: 0 auto;
+    		padding-top: 16px;
+    		/*border: 1px solid red;*/
+		}
+	</style>
+<script type="text/javascript" src="/app/resource/js/lib/jquery-1.11.1.min.js"></script>
+
+</head>
+<body>
+	<div style="width: 100%;height:50px;background: #515151;">
+		<div class="her-span">
+			<span id="span1">推荐房源</span>
+			<span id="span2" class="a">推荐客户</span>
+		</div>
+	</div>
+	<div id="taler" style="display: none;">
+			<form method="post" action="{php echo $this->createMobileUrl('aboutmine',array('op'=>'home'))}">
+		<div style="border-bottom: 1px solid #B4B4B4;padding-top: 10px;width:97%;padding-left: 3%; ">
+			<img width="13%" src="/addons/iw_house/template/mobile/images/homeview.png">
+			<span style="font-size: 20px;font-weight: bold;color: #5F5F5F;position: relative;top:-10px">推荐房源</span>
+		</div>
+		<input type="hidden" name="uid" value="{$uid}">
+		<div class="ar" style=";width:97%;">
+			<img width="8%" src="/addons/iw_house/template/mobile/images/my.png">
+			<span style="font-size: 15px;font-weight: bold;color: #656565;position: relative;top:-5px">房主姓名：</span>
+			<input type="text" id="name" style="height: 30px;position: relative;top:-5px;border-radius: 5px " name="name" value="">
+		</div>
+		<div class="ar">
+			<img width="8%" src="/addons/iw_house/template/mobile/images/14.png">
+			<span style="font-size: 15px;font-weight: bold;color: #656565;position: relative;top:-5px">房主电话：</span>
+			<input type="tell" id="cell" style="height: 30px;position: relative;top:-5px;border-radius: 5px " name="cell" value="" maxlength="11">
+		</div>
+		<div class="ar">
+			<img width="9%" src="/addons/iw_house/template/mobile/images/position.png">
+			<span style="font-size: 15px;font-weight: bold;color: #656565;position: relative;top:-5px">房源地址：</span>
+			<select name="position" style="height: 40px;width: 55%;position: relative;top:-5px;border-radius: 5px;font-size: 15px;color: #656565;font-weight: bold;">
+				{loop $recommend $item}
+					<option value="{$item['id']}">{$item['province']}{$item['city']}{$item['county']}
+					</option>
+				{/loop}
+			</select>
+		</div>
+		<div id="info" style="width:100%;display: none;font-size: 20px;color: red;"></div>
+		<div style="background: #F2F2F2;text-align: center;">
+			<button id="butt" style="margin:25px auto;width: 80%;background: #A9D28E;font-size: 20px;font-weight: bold;text-align: center;color: white;height: 50px;border-radius: 10px;">提交</button>
+		</div>
+		</form>
+	</div>
+
+	<div  id="ta">
+		<form method="post" action="{php echo $this->createMobileUrl('aboutmine',array('op'=>'users'))}">
+			<input type="hidden" name="uid" value="{$uid}">
+			<div style="border-bottom: 1px solid #B4B4B4;padding-top: 10px;padding-left:3%;margin-top: 10px;width:97%;">
+			<img width="13%" src="/addons/iw_house/template/mobile/images/19.png">
+			<span style="font-size: 20px;font-weight: bold;color: #5F5F5F;position: relative;top:-10px">推荐客户</span>
+		</div>
+		<div class="ar">
+			<img width="8%" src="/addons/iw_house/template/mobile/images/my.png">
+			<span style="font-size: 15px;font-weight: bold;color: #656565;position: relative;top:-5px">客户姓名：</span>
+			<input type="text" id="username" style="height: 30px;position: relative;top:-5px;border-radius: 5px " name="username" value="">
+		</div>
+		<div class="ar">
+			<img width="8%" src="/addons/iw_house/template/mobile/images/14.png">
+			<span style="font-size: 15px;font-weight: bold;color: #656565;position: relative;top:-5px">客户电话：</span>
+			<input type="tell" id="phone" style="height: 30px;position: relative;top:-5px;border-radius: 5px " name="phone" value="" maxlength="11">
+		</div>
+		<div class="ar">
+			<img width="9%" src="/addons/iw_house/template/mobile/images/position.png">
+			<span style="font-size: 15px;font-weight: bold;color: #656565;position: relative;top:-5px">购房地址：</span>
+			<select name="address" style="height: 40px;width: 55%;position: relative;top:-5px;border-radius: 5px;font-size: 15px;color: #656565;font-weight: bold;">
+				{loop $recommend $it}
+					<option value="{$it['id']}">{$it['province']}{$it['city']}{$it['county']}
+					</option>
+				{/loop}
+			</select>
+		</div>
+		<div class="ar">
+			<img width="8%" src="/addons/iw_house/template/mobile/images/20.png">
+			<span style="font-size: 18px;font-weight: bold;color: #656565;position: relative;top:-5px">意向房源描述：</span>
+			<textarea rows="10" cols="35" id="int" name="intention" style="border:1px solid #B4B4B4;position: relative;left: 10%">
+
+			</textarea>
+		</div>
+		<div id="info1" style="width:100%;display: none;font-size: 20px;color: red;"></div>
+		<div style="background: #F2F2F2;text-align: center;">
+			<button id="butt1" style="margin:25px auto;width: 80%;background: #A9D28E;font-size: 20px;font-weight: bold;text-align: center;color: white;height: 50px;border-radius: 10px;">提交</button>
+		</div>
+	</form>
+	</div>
+
+<div style="width: 100%;height: 60px;background: #F2F2F2;"></div>
+</body>
+</html>
+<script type="text/javascript">
+	//检测信息
+	$(function(){
+
+		//点击事件
+		$("#span1").click(function(){
+
+			//改变样式
+			$(this).attr("class","a");
+			$("#span2").attr("class","b");
+			//隐藏信息
+			$("#ta").css("display","none");
+			$("#taler").css("display","block");
+
+		});
+		$("#span2").click(function(){
+
+			//改变样式
+			$(this).attr("class","a");
+			$("#span1").attr("class","b");
+			//隐藏信息
+			$("#ta").css("display","block");
+			$("#taler").css("display","none");
+
+		});
+		//失去焦点时
+		$("#cell").blur(function(){
+			var cell = $(this).val();
+			//验证
+			$.post("{php echo $this->createMobileUrl('aboutmine',array('op'=>'tell'))}",{"tell":cell},function(result){
+
+				if(result == 'no'){
+
+					$("#info").show();
+					$("#info").html("房主电话已存在，请填写新的房主信息");
+					$("#cell").val('');
+					// $("#butt").click(function(){
+
+					// 	return false;
+
+					// });
+				}
+			});
+		}).focus(function(){
+
+				$("#info").hide();
+				$("#info").html("");
+
+		});
+		//失去焦点时
+		$("#phone").blur(function(){
+
+			//获取相应的值
+			var phone = $(this).val();
+			//验证
+			$.post("{php echo $this->createMobileUrl('aboutmine',array('op'=>'phone'))}",{"phone":phone},function(result1){
+				// alert(result1);
+				if(result1 == 'no'){
+
+					$("#info1").show();
+					$("#info1").html("客户电话已存在，请填写新的客户信息");
+					$("#phone").val('');
+					// $("#butt1").click(function(){
+					// 	return false;
+					// });
+					// $aa=false;
+				}
+			});
+		}).focus(function(){
+
+				$("#info1").hide();
+				$("#info1").html("");
+
+		});
+		//提交时验证信息
+		$("#butt").click(function(){
+
+			//获取值
+			var name = $("#name").val();
+			var cell1 = $("#cell").val();
+
+
+				//判断信息的完整性
+				if(name == ''){
+
+					$("#info").show();
+					$("#info").html("请输入房主姓名");
+
+						return false;
+				}
+				if(cell1 == ''){
+
+					$("#info").show();
+					$("#info").html("请输入房主电话");
+
+						return false;
+
+
+
+				}
+		});
+
+		//提交时验证信息
+		$("#butt1").click(function(){
+
+			var username = $("#username").val();
+			var phone1 = $("#phone").val();
+			var int = $("#int").val();
+			if(username == ''){
+
+					$("#info1").show();
+					$("#info1").html("请输入客户姓名");
+
+						return false;
+
+
+				}
+				if(phone1 == ''){
+
+					$("#info1").show();
+					$("#info1").html("请输入客户电话");
+
+						return false;
+
+
+
+				}
+				if(int == ''){
+
+					$("#info1").show();
+					$("#info1").html("请输入客户意向信息");
+
+						return false;
+
+
+
+				}
+
+
+		});
+	})
+</script>

@@ -1,0 +1,86 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+      <li class="active"><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'list'));}">站点列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'add'));}">站点添加</a></li>
+     <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'staff'));}">员工信息</a></li>
+      <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'staff_add'));}">添加员工信息</a></li>
+
+</ul>
+<div class="main">
+
+ <div class="panel panel-info">
+      <div class="panel-heading">筛选</div>
+      <div class="panel-body">
+        <form action="./index.php" method="post" class="form-horizontal" role="form">
+          <input type="hidden" name="c" value="site" />
+          <input type="hidden" name="a" value="entry" />
+          <input type="hidden" name="m" value="iw_house" />
+          <input type="hidden" name="do" value="stationlist" />
+          <input type="hidden" name="op" value="list" />
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+            <div class="col-sm-8 col-lg-9">
+              <input class="form-control" name="keyword" placeholder="站点名称/站点电话/站点负责人姓名/负责人电话/地址/添加时间(格式：2016-11-22)" type="text" value="">
+            </div>
+            <div class=" col-xs-12 col-sm-2 col-lg-2">
+              <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+            </div>
+          </div>
+          <div class="form-group">
+          </div>
+        </form>
+      </div>
+  
+    </div>
+    <div class="alert alert-info">
+        <h4 style="color:red">
+            <i class="fa fa-info-circle"></i>
+           站点一旦被删除，则此站点下面的所有员工所属站点变为空，还需手动重新分配，请谨慎操作！！！<br>
+        </h4>
+    </div>
+    <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:10%;">ID</th>
+                        <th style="width:15%;">站点名称</th>
+                        <th style="width:15%;">站点电话</th>
+                        <th style="width:15%;">站点负责人姓名</th>
+                        <th style="width:15%;">负责人电话</th>
+                        <th style="width:15%;">站点地址</th>
+                        <th style="width:15%;">站点店面图</th>
+                        <th style="width:15%;">添加时间</th>
+                        <th style="width:15%;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $station $item}
+                    <tr>
+                        <td>{$item['id']}</td>
+                        <td>{$item['name']}</td>
+                        <td>{$item['cell']}</td>
+                        <td>{$item['username']}</td>
+                        <td>{$item['phone']}</td>
+                        <td>{$item['province']}{$item['city']}{$item['county']}</td>
+                        <td>
+                           <img style="width:40px; height:40px;" src="/attachment/{$item['pictures']}">
+                        </td>
+                        <td>{$item['time']}</td>
+                
+                        <td style="text-align:left;">
+                            <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('stationlist', array('op'=>'edit','id'=>$item['id']));}" title="修改站点信息">编辑</a>
+                           <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('stationlist', array('op'=>'details','id'=>$item['id']));}" title="站点信息详情">详情</a>
+                            <a class="btn btn-danger btn-sm" href="{php echo  $this->createWebUrl('stationlist', array('op'=>'delete','id'=>$item['id']));}" title="删除站点" onclick="return confirm('此操作不可恢复，确认删除？');return false;"><i class="fa fa-times"></i></a>
+                      </td>            
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager}
+            </div>
+        </div>
+    </form>
+</div>

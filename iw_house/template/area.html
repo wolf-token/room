@@ -1,0 +1,69 @@
+{template 'common/header'}
+
+
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('pattern', array('op'=>'list'));}">房源格局列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('pattern', array('op'=>'add'));}">房源格局添加</a></li>
+     <li class="active"><a href="{php echo  $this->createWebUrl('pattern', array('op'=>'area'));}">房源归属地区列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('pattern', array('op'=>'area_add'));}">房源归属添加</a></li>
+
+</ul>
+<div class="main">
+ <div class="panel panel-info">
+      <div class="panel-heading">筛选</div>
+      <div class="panel-body">
+        <form action="./index.php" method="post" class="form-horizontal" role="form">
+          <input type="hidden" name="c" value="site" />
+          <input type="hidden" name="a" value="entry" />
+          <input type="hidden" name="m" value="iw_house" />
+          <input type="hidden" name="do" value="area" />
+          <input type="hidden" name="op" value="list" />
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+            <div class="col-sm-8 col-lg-9">
+              <input class="form-control" name="keyword" placeholder="房源归属地名称/创建时间（格式:2016-11-12）" type="text" value="">
+            </div>
+            <div class=" col-xs-12 col-sm-2 col-lg-2">
+              <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+            </div>
+          </div>
+          <div class="form-group">
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+
+                        <th style="width:15%;">ID</th>
+                        <th style="width:15%;">房源归属地名称</th>
+                        <th style="width:15%;">创建时间</th>
+                        <th style="width:15%;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $area $item}
+                    <tr>
+                        <td>{$item['id']}</td>
+                        <td>{$item['name']}</td>
+                       <td>{$item['time']}</td>
+
+                        <td style="text-align:left;">
+                            <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('pattern', array('op'=>'area_edit','id'=>$item['id']));}" title="编辑">编辑</a>
+
+                            <a class="btn btn-danger btn-sm" href="{php echo  $this->createWebUrl('pattern', array('op'=>'area_delete','id'=>$item['id']));}" title="删除用户" onclick="return confirm('此操作不可恢复，确认删除？');return false;"><i class="fa fa-times"></i></a>
+                      </td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager1}
+            </div>
+        </div>
+    </form>
+</div>

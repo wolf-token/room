@@ -1,0 +1,328 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'list'));}">房源列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'add'));}">房源添加</a></li>
+     <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'contact'));}">房源联系人信息</a></li>
+      <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'recle'));}">已交易房源信息</a></li>
+   <li class="active"><a>修改房源信息</a></li>
+</ul>
+<div class="main">
+   <div class="alert alert-info">
+        <h4>
+            <i class="fa fa-info-circle"></i>
+            说明:修改房源信息时，确定房源交易后再输入金额返现值，请谨慎操作。分配佣金处只可输入一处。<br>
+        </h4>
+        <p style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;商户结算数据涉及钱款操作，请认真审核，谨慎操作！</p>
+    </div>
+	<div class="clearfix">
+    <form id="theform" class="form form-horizontal" action="./index.php?c=site&a=entry&op=update&do=roomlist&m=iw_house" method="post">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                修改房源信息
+            </div>
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" id="name" value="{$room_edit['name']}" class="form-control">
+                    </div>
+                    <input type="hidden" name="id" value="{$room_edit['id']}">
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源面积</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="area" id="area" value="{$room_edit['area']}" class="form-control">
+                    </div>
+                    ㎡
+                </div>
+                <input type="hidden" name="residue_money" value="{$room_edit['residue_money']}">
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源总价格</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="price" id="price" value="{$room_edit['price']}" class="form-control">
+                    </div>
+                    万
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源平均价格</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="number" name="average" id="average" value="{$room_edit['average']}" class="form-control">
+                    </div>
+                    元/㎡
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源展示类型</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="mold" style="height:32px">
+                         <option value="0" {if $room_edit['mold'] == 0} selected="selected" {/if}>普通类型</option>
+                         <option value="1" {if $room_edit['mold'] == 1} selected="selected" {/if}>推荐类型</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源格局</label>
+                    <div class="col-sm-9 col-xs-12">
+                         <select name="pattern" style="height:32px">
+                       {loop $paty $itu}
+                         <option value="{$itu['id']}" {if $room_edit['pattern'] == $itu['id']} selected="selected" {/if}>{$itu['name']}</option>
+                       {/loop}}
+
+                       </select>
+                    </div>
+                </div>
+                <input type="hidden" name="person" value="{$room_edit['person_id']}">
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房东信息</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="person_id" style="height:32px">
+                       {loop $person $ita}
+                         <option value="{$ita['id']}" {if $room_edit['person_id'] == $ita['id']} selected="selected" {/if}>&nbsp;&nbsp;姓名：{$ita['name']}&nbsp;&nbsp;|&nbsp;&nbsp;
+                         电话：{$ita['cell']}</option>
+                       {/loop}
+                       </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐人信息</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="recommend_id" style="height:32px">
+                       {loop $broker $ito}
+                         <option value="{$ito['id']}" {if $room_edit['recommend_id'] == $ito['id']} selected="selected" {/if}>&nbsp;&nbsp;姓名：{$ito['realname']}&nbsp;&nbsp;|&nbsp;&nbsp;
+                         电话：{$ito['mobile']}</option>
+                       {/loop}
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源状态</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="status" style="height:32px">
+                         <option value="0" {if $room_edit['status'] == 0} selected="selected" {/if}>未定房</option>
+                         <option value="1" {if $room_edit['status'] == 1} selected="selected" {/if}>定房</option>
+
+                       </select>
+                        <span style="color: red;font-size:20px">(一旦房源状态为定房时，请务必选择购买人（即客户）！！！)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">购买人（即客户）</label>
+                    <div class="col-sm-9 col-xs-12" id="b">
+                    <input type="hidden" name="in" id="in" value="{$room_edit['buy_id']}">
+                       <select name="buy_id" style="height:32px">
+                        <option value="0" {if $room_edit['buy_id'] == 0} selected="selected" {/if}>无人购买</option>
+                       {loop $customer $it}
+                         <option value="{$it['id']}" {if $room_edit['buy_id'] == $it['id']} selected="selected" {/if}>&nbsp;&nbsp;姓名：{$it['name']}&nbsp;&nbsp;|&nbsp;&nbsp;
+                         电话：{$it['phone']}</option>
+                       {/loop}
+                       </select>
+                        <span style="color: red;font-size:20px">(一旦购买人选定则不能在进行修改(房源只是定房状态时可以修改)，请仔细选择！否则后果自负！！！)</span>
+                    </div>
+                    <span style="display: none;" id="a"></span>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房款状态</label>
+                    <div class="col-sm-9 col-xs-12">
+                         <select name="pay_status" id="pay_status" style="height:32px">
+                         <option value="0" {if $room_edit['pay_status'] == 0} selected="selected" {/if}>未付款</option>
+                         <option value="1" {if $room_edit['pay_status'] == 1} selected="selected" {/if}>已付定金</option>
+                          <option value="2" {if $room_edit['pay_status'] == 2} selected="selected" {/if}>已付首付</option>
+                           <option value="3" {if $room_edit['pay_status'] == 3} selected="selected" {/if}>已付款</option>
+                       </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">付款方式</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <select name="pay_way" style="height:32px">
+                         <option value="0" {if $room_edit['pay_way'] == 0} selected="selected" {/if}>房源未交易</option>
+                         <option value="1" {if $room_edit['pay_way'] == 1} selected="selected" {/if}>现金</option>
+                         <option value="2" {if $room_edit['pay_way'] == 2} selected="selected" {/if}>刷卡</option>
+                         <option value="3" {if $room_edit['pay_way'] == 3} selected="selected" {/if}>微信支付</option>
+                         <option value="4" {if $room_edit['pay_way'] == 4} selected="selected" {/if}>支付宝支付</option>
+                       </select>
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">金额分配返现点</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="number" name="assign" value="{$room_edit['money']}">&nbsp;元
+                        <span style="color: red;font-size:20px">(此处输入的为金额返现的总钱数，分配金额按照标准自动分配，房源交易完成后在输入值！！！)</span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源装修等级</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="decorate" style="height:32px">
+                         <option value="0" {if $room_edit['decorate'] == 0} selected="selected" {/if}>简修</option>
+                         <option value="1" {if $room_edit['decorate'] == 1} selected="selected" {/if}>精修</option>
+                         <option value="2" {if $room_edit['decorate'] == 2} selected="selected" {/if}>豪装</option>
+                          <option value="3" {if $room_edit['decorate'] == 3} selected="selected" {/if}>未装修</option>
+                       </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">一级经纪人分配佣金数值</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="number" name="alone_one" value="{$room_edit['alone_one']}">&nbsp;元
+                        <span style="color: red;font-size:20px">(此处以及下面输入的为房源独立的金额返现点，不同的等级可以输入不同的金额，不按照金额分配标准！！！)</span>
+                    </div>
+
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">二级经纪人分配佣金数值</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="number" name="alone_two" value="{$room_edit['alone_two']}">&nbsp;元
+
+                    </div>
+
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">三级经纪人分配佣金数值</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="number" name="alone_three" value="{$room_edit['alone_three']}">&nbsp;元
+
+                    </div>
+
+                </div>
+                  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房屋卧室图</label>
+                    <div class="col-sm-9 col-xs-12">
+
+                     {php echo tpl_form_field_image('imguqcl',$pictures['imguqcl']);}
+
+                    </div>
+                 </div>
+        <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房屋户型图</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_image('pictures_type',$pictures['type']);}
+
+                    </div>
+                 </div>
+                   <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房屋客厅图</label>
+                    <div class="col-sm-9 col-xs-12">
+
+                       {php echo tpl_form_field_image('living',$pictures['living']);}
+                    </div>
+
+                 </div>
+                   <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房屋交通图</label>
+                    <div class="col-sm-9 col-xs-12">
+                      {php echo tpl_form_field_image('traffic',$pictures['traffic']);}
+                    </div>
+                 </div>
+                   <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房屋其它展示图</label>
+                    <div class="col-sm-9 col-xs-12">
+
+                     {php echo tpl_form_field_image('other',$pictures['other']);}
+                    </div>
+                 </div>
+                 <input type="hidden" name="pictures_id" value="{$pictures['id']}">
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源简介</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {php echo tpl_ueditor('content',$room_edit['infomation']);}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源类型</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="type" style="height:32px">
+                         <option value="0" {if $room_edit['type'] == 0} selected="selected" {/if}>新房源</option>
+                         <option value="1" {if $room_edit['type'] == 1} selected="selected" {/if}>二手房</option>
+                        <option value="1" {if $room_edit['type'] == 2} selected="selected" {/if}>毛坯房</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源归属城市</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="city" style="height:32px">
+                       {loop $cito $item}
+                         <option value="{$item['id']}" {if $room_edit['city'] == $item['id']} selected="selected" {/if}>{$item['province']}{$item['city']}{$item['county']}</option>
+                       {/loop}}
+
+                       </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源归属地区</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <select name="liation" style="height:32px">
+                       {loop $pop $top}
+                         <option value="{$top['id']}" {if $room_edit['liation'] == $top['id']} selected="selected" {/if}>{$top['name']}</option>
+                       {/loop}}
+
+                       </select>
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源位置</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="position" id="position" value="{$room_edit['position']}" class="form-control">
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源小区名</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="community" id="community" value="{$room_edit['community']}" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 50px">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <!-- <input name="submit" id="submint" type="submit" value="保存" onclick="refer()" class="btn btn-primary btn-block">
+                        <input type="hidden" name="token" value="85616f84"> -->
+                        <button id="submit" class="btn btn-primary btn-block">保存</button>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </form>
+</div>
+</div>
+<script type="text/javascript">
+
+   $("#submit").click(function(){
+
+       if(confirm("您确认提交，提交后数据将不能修改，请确认无误后在提交！！！")){
+
+        return true;
+       }else{
+
+        return false;
+       }
+
+   });
+   //获取信息
+   var buyman = $("#in").val();
+   // alert(buyman);
+   //判断是否已经有购买人
+   if(buyman != 0){
+    // alert("nihao ");
+         //隐藏信息
+        $("#b").style("display","none");
+        $("#a").style("display","block");
+        //查取信息
+        $.post("{php echo  $this->createWebUrl('roomlist', array('op'=>'to'));}",{"people":buyman},function(result){
+
+            // $("#span").html(result);
+
+        });
+        // alert( $("#span").html());
+
+
+   }
+
+</script>

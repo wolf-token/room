@@ -1,0 +1,204 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'list'));}">房源列表</a></li>
+     <li class="active"><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'add'));}">房源添加</a></li>
+     <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'contact'));}">房源联系人信息</a></li>
+      <li><a href="{php echo  $this->createWebUrl('roomlist', array('op'=>'recle'));}">已交易房源信息</a></li>
+</ul>
+<div class="clearfix">
+    <div class="alert alert-info">
+        <h4>
+            <i class="fa fa-info-circle"></i>
+            说明: 管理员添加房源信息时请仔细核对房主信息和房源信息！<br>
+        </h4>
+        <p style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;房源添加涉及钱款操作，请认真审核，谨慎操作！</p>
+    </div>
+    <form id="theform" class="form form-horizontal" action="./index.php?c=site&a=entry&op=add&do=roomlist&m=iw_house" method="post">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                添加房源
+            </div>
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" id="name" value="" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源面积</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="area" id="area" value="" class="form-control">
+                    </div>
+                    ㎡
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源总价格</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="price" style="width: 200px" value="" class="form-control">
+                        <span style="position: relative;top: -25px;right: -210px">万</span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源平均价格</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="number" name="average" style="width: 200px" value="" class="form-control">
+                         <span style="position: relative;top: -25px;right: -210px">元/㎡</span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源展示类型</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <select name="mold" style="height:32px;width:150px">
+                            <option value="0">普通类型</option>
+                            <option value="1">推荐类型</option>
+                        </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源装修等级</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="decorate" style="height:32px;width:150px">
+                           <option value="0">简修</option>
+                           <option value="1">精修</option>
+                           <option value="2">豪装</option>
+                           <option value="3">未装修</option>
+                       </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源状态</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="status" style="height:32px;width:150px">
+                           <option value="0">未定房</option>
+                           <option value="1">定房</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源格局</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <select name="pattern" style="height:32px;width:100px;">
+                         {loop $pat $tal}
+
+                           <option value="{$tal['id']}">{$tal['name']}</option>
+                        {/loop}
+                       </select>
+                    </div>
+
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源类型</label>
+                    <div class="col-sm-9 col-xs-12">
+                         <select name="fus" style="height:32px;width:150px">
+                           <option value="0">新房</option>
+                           <option value="1">二手房</option>
+                           <option value="2">毛坯房</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">请选择房东信息</label>
+                    <div class="col-sm-9 col-xs-12">
+                         <select name="person_id" style="height:32px;width:600px">
+                         {loop $room_add $item}
+
+                           <option value="{$item['id']}">姓名：{$item['name']}&nbsp;&nbsp;&nbsp;
+                           |&nbsp;&nbsp;&nbsp;电话：{$item['cell']}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;推荐人姓名:{$item['push']['realname']}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;推荐人电话:{$item['push']['mobile']}</option>
+                        {/loop}
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房屋卧室图</label>
+                    <div class="col-sm-9 col-xs-12">
+
+                		 {php echo tpl_form_field_image('imguqlc');}
+
+                    </div>
+                 </div>
+			  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房屋户型图</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_image('type');}
+
+                    </div>
+                 </div>
+                   <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房屋客厅图</label>
+                    <div class="col-sm-9 col-xs-12">
+
+                       {php echo tpl_form_field_image('living');}
+                    </div>
+                 </div>
+                   <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房屋交通图</label>
+                    <div class="col-sm-9 col-xs-12">
+                      {php echo tpl_form_field_image('traffic');}
+                    </div>
+                 </div>
+                   <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房屋其它展示图</label>
+                    <div class="col-sm-9 col-xs-12">
+
+                     {php echo tpl_form_field_image('other');}
+                    </div>
+                 </div>
+			 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源小区名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="community" id="community" value="" class="form-control">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源简介</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_ueditor('content');}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源位置</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="position" id="position" value="" class="form-control">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源地区选择</label>
+                     <select name="from" style="height:32px;width:200px;margin-left: 15px">
+                         {loop $from $tal}
+
+                           <option value="{$tal['id']}">{$tal['name']}</option>
+                        {/loop}
+                       </select>
+                       <span style="color: red">(请依据房源归属城市选择)</span>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源归属城市</label>
+                     <select name="city" style="height:32px;width:200px;margin-left: 15px">
+                         {loop $cit $to}
+
+                           <option value="{$to['id']}">{$to['province']}{$to['city']}{$to['county']}</option>
+                        {/loop}
+                       </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <input name="submit" type="submit" value="保存" class="btn btn-primary btn-block">
+                        <input type="hidden" name="token" value="85616f84">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>

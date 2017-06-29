@@ -1,0 +1,61 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li {if $operation == 'rule'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rule'));}">规则设置</a></li>
+    <li class="active"><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank'));}">等级设置</a></li>
+     <li {if $operation == 'assign'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'assign'));}">分配金额设置</a></li>
+       <!--  <li {if $operation == 'agreement'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'agreement'));}">用户服务协议设置</a></li> -->
+</ul>
+<div class="main">
+      <div class="panel panel-default">
+            <div class="panel-heading">
+                等级信息
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs" id="myTab">
+                     <li {if $operation == 'rank'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank'));}">三级升二级规则信息</a></li>
+                    <li {if $operation == 'rank_add'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank_add'));}">三级升二级规则设置</a></li>
+                    <li {if $operation == 'rank_list_one'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank_list_one'));}">二级升一级规则信息</a></li>
+                     <li {if $operation == 'rank_add_one'} class="active" {/if}><a href="{php echo  $this->createWebUrl('systemlist', array('op'=>'rank_add_one'));}">二级升一级规则设置</a></li>
+                </ul>
+                <div class="tab-content">
+                   <div class="alert alert-info">
+                      <h4>
+                          <i class="fa fa-info-circle"></i>
+                          说明: 推荐经纪人和客户购房数，两者是分开的条件。<br>
+                      </h4>
+                      <p style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;两个条件请必须全部填写！</p>
+                  </div>
+                                  <div class="tab-pane  active" id="tab_basic">
+                  <form action="./index.php?c=site&a=entry&op=rank_add_one&do=systemlist&m=iw_house" method="post">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">团队中经济人数量</label>
+                            <div class="col-sm-9">
+                             <input type="number" name="person" value="">
+                            </div>
+                        </div>
+                        <div class="form-group" style="padding-top: 50px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">团队推荐客户购买房数</label>
+                            <div class="col-sm-9">
+                             <input type="number" name="math" value="">
+                            </div>
+                        </div>
+                       <div class="form-group" style="padding-top: 50px">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">规则说明</label>
+                            <div class="col-sm-9">
+                             {php echo tpl_ueditor('content');}
+                            </div>
+                        </div>
+                           <div class="form-group" style="position: relative;bottom: -10px">
+                                <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                                <div class="col-md-2 col-lg-1">
+                                    <input name="submit" type="submit" value="保存" class="btn btn-primary btn-block">
+                                    <input type="hidden" name="token" value="85616f84">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+ </div>  

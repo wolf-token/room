@@ -1,0 +1,37 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('pattern', array('op'=>'list'));}">房源格局列表</a></li>
+     <li class="active"><a href="{php echo  $this->createWebUrl('pattern', array('op'=>'add'));}">房源格局添加</a></li>
+      <li><a href="{php echo  $this->createWebUrl('pattern', array('op'=>'area'));}">房源归属地区列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('pattern', array('op'=>'area_add'));}">房源归属添加</a></li>
+</ul>
+<div class="clearfix">
+    <form id="theform" class="form form-horizontal" action="./index.php?c=site&a=entry&op=add&do=pattern&m=iw_house" method="post">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                添加房源格局
+            </div>
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">房源格局名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" id="name" value="" class="form-control">
+                        <span>（格局样式例：一室一厅）</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <input name="submit" type="submit" value="保存" class="btn btn-primary btn-block">
+                        <input type="hidden" name="token" value="85616f84">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>

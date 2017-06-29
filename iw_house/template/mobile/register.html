@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>乐居——全民营销</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<style type="text/css">
+		input{
+			height: 30px;
+			border-radius: 5px;
+		}
+		a{
+			text-decoration:none;
+			color: #7B7B7B;
+		}
+		.tijiao{
+
+		}
+		ol,
+			ul {
+				list-style: none;
+			}
+			.mingcheng{
+				/*border:1px solid red;*/
+				float: left;
+				width: 56px;
+				height: 31px;
+				line-height: 30px;
+				font-size: 18px;
+				margin-right: 5px;
+			}
+			#butt{
+				border-top:0px;
+				border-bottom:0px;
+				border-left:0px;
+				border-right:0px;
+			}
+	</style>
+<script type="text/javascript" src="/app/resource/js/lib/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<div style="margin: 2% auto;width: 35%;height:20%;border:2px solid #ccc;border-radius:15px;">
+	<img style="width:100%;height:100%" src="/addons/iw_house/template/mobile/images/logo1.jpg">
+</div>
+	<div width="100%" style="margin-top:20px;text-align: center;font-size: 20px;font-weight: bold;color: #848484">
+		注册
+	</div>
+  <form action="{php echo $this->createMobileUrl('user',array('op'=>'postRegist'))}" method="post">
+		<div width="100%" style="margin-top: 20px;color: #7C7C7C;font-weight: bold;">
+		<div style="width:80%;margin:0 auto;">
+			<div class="mingcheng">手机号</div><input style="width:70%;" type="tell" id="tell" name="mobile" value="" maxlength="11" required="">
+		</div>
+		<input type="hidden" name="uid" value="{$register}">
+		</div>
+		<div width="100%" style="margin-top: 20px;color: #7C7C7C;font-weight: bold;">
+		<div style="width:80%;margin:0 auto;">
+			<div class="mingcheng">验证码</div><input style="height: 30px;border-radius: 5px;width: 35%;" type="text-align" name="cell" value="" maxlength="11" required="">
+			<div id='mmm' class="mmm" style="height: 35px;background: #AAD18E;width: 80px;border-radius:5px;color: white; line-height:35px;text-align:center;display: inline-block;font-size:10px">获取验证码</div>
+
+			</div>
+		</div>
+		<div width="100%" style="margin-top: 20px;color: #7C7C7C;font-weight: bold;">
+		<div style="width:80%;margin:0 auto;">
+			<div class="mingcheng">姓&nbsp;名</div><input style="width:70%;"  type="text" name="name" value="" required="">
+			</div>
+		<!-- <div width="100%" style="margin-top: 20px;color: #7C7C7C;font-weight: bold;">
+			<div style="width:80%;margin:0 auto;">
+			身份证&nbsp;<input style="width:70%;"  id="card" type="text" name="card" value="" required="">
+			</div>
+		</div> -->
+		<div style=" float:right;margin:3% 18% 10% 0;color: #7C7C7C;font-weight: bold;font-size:15px;">
+		<ul>
+			<li style="float: left;">
+				<input type="checkbox" name="check" value="" required >
+			</li>
+			<li style="float: left;line-height: 30px;">
+				<a href="http://wx.yichujilian.com/app/index.php?i=3&c=site&a=site&do=detail&id=46">用户协议</a>
+			</li>
+			</ul>
+			<!-- <input type="checkbox" name="check" value="" required ><a href="http://wx.yichujilian.com/app/index.php?i=3&c=site&a=site&do=detail&id=46">用户协议</a> -->
+		</div>
+		<span id="info" style="display:none;color: red;font-size: 15px"></span>
+		<div width="100%">
+		<div style="width:70%;margin:0 auto;">
+			<button id="butt" style="color: white;width: 100%;height:45px;border-radius:5px;background: #AAD18E">提交</button>
+			</div>
+		</div>
+	</form>
+
+	<div style="width: 100%;height: 60px"></div>
+<!-- {template foot} -->
+</body>
+</html>
+<script type="text/javascript">
+
+	//验证消息
+	$(function(){
+
+		//验证手机号是否存在
+		$("#tell").blur(function(){
+
+			//获取值
+			var tell = $(this).val();
+			// alert("{php echo $this->createMobileUrl('user',array('op'=>'mobile'))}")
+			//验证
+			$.post("{php echo $this->createMobileUrl('user',array('op'=>'mobile'))}",{"mobile":tell},function(result){
+
+				if(result == 'no'){
+
+					$("#info").show();
+					$("#info").html("手机号已存在，请重新填写");
+					$("#butt").click(function(){
+
+						return false;
+
+					});
+				}
+			});
+		}).focus(function(){
+
+			$("#info").hide();
+			$("#info").html("");
+		});
+		//验证身份号是否存在
+		// $("#card").blur(function(){
+
+		// 	//获取值
+		// 	var card = $(this).val();
+
+		// 	//验证
+		// 	$.post("{php echo $this->createMobileUrl('user',array('op'=>'card'))}",{"card":card},function(result){
+
+		// 		if(result == 'no'){
+
+		// 			$("#info").show();
+		// 			$("#info").html("身份证号已存在，请重新填写");
+		// 			$("#butt").click(function(){
+
+		// 				return false;
+
+		// 			});
+		// 		}
+		// 	});
+		// }).focus(function(){
+
+		// 	$("#info").hide();
+		// 	$("#info").html("");
+		// });
+
+
+//验证码
+$('.mmm').click(function(){
+	var phone=$('#tell').val();
+	if($(this).text()=='获取验证码'){
+// alert("{php echo $this->createMobileUrl('user',array('op'=>'yzm'))}")
+		$.post("{php echo $this->createMobileUrl('user',array('op'=>'yzm'))}",{"tell":phone},function(result){
+
+			if(result=='"0"'){
+				var i=60;
+				var inte=setInterval(function(){
+					if(i<=0){
+						$('#mmm').text('获取验证码');
+						$('#mmm').attr('class','mmm');
+						clearInterval(inte);
+					}else{
+						i--;
+						$('#mmm').text(i+'秒后重新获取');
+			       			$('#mmm').attr('class','');
+					}
+				},1000);
+			}
+		});
+
+	}
+
+})
+
+
+
+	})
+</script>
+

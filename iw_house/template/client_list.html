@@ -1,0 +1,119 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li {if $operation == 'list'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'list'));}">经纪人列表</a></li>
+       <li {if $operation == 'client'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'client'));}">客户列表</a></li>
+</ul>
+<div class="main">
+  <div class="panel panel-info">
+      <div class="panel-heading">筛选</div>
+      <div class="panel-body">
+        <form action="./index.php" method="post" class="form-horizontal" role="form">
+          <input type="hidden" name="c" value="site" />
+          <input type="hidden" name="a" value="entry" />
+          <input type="hidden" name="m" value="iw_house" />
+          <input type="hidden" name="do" value="brokerlist" />
+          <input type="hidden" name="op" value="client" />
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+            <div class="col-sm-8 col-lg-9">
+              <input class="form-control" name="keyword" placeholder="客户姓名/客户电话/推荐时间（格式：2016-11-24）" type="text" value="">
+            </div>
+            <div class=" col-xs-12 col-sm-2 col-lg-2">
+              <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+            </div>
+          </div>
+          <div class="form-group">
+          </div>
+        </form>
+      </div>
+  
+    </div>
+     <div class="panel panel-info">
+      <div class="panel-heading">快速搜索</div>
+      <div class="panel-body">
+        <form action="./index.php" method="post" class="form-horizontal" role="form">
+          <input type="hidden" name="c" value="site" />
+          <input type="hidden" name="a" value="entry" />
+          <input type="hidden" name="m" value="iw_house" />
+          <input type="hidden" name="do" value="brokerlist" />
+          <input type="hidden" name="op" value="client" />
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label" style="width: 120px">工作人员信息</label>
+            <div class="col-sm-8 col-lg-9"  style="width: 410px">
+            
+                <select name="staff" style="width: 300px;height: 40px;border-radius: 5px">
+                 {loop $staff $it}
+                  <option value="{$it['id']}" {if $it['id'] == $sta && $sta !=''} selected {/if}>姓名:{$it['name']}&nbsp;&nbsp;电话：{$it['phone']}</option>
+                  {/loop}
+                </select>
+
+            </div>
+            <div class=" col-xs-12 col-sm-2 col-lg-2">
+              <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+            </div>
+          </div>
+          <div class="form-group">
+          </div>
+        </form>
+      </div>
+  
+    </div>
+    <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:8%;">ID</th>
+                        <th style="width:8%;">客户姓名</th>
+                        <th style="width:10%;">客户电话</th>
+                        <th style="width:30%;">购买房源意向描述</th>
+                        <th style="width:9%;">客户已购房数量</th>
+                        <th style="width:8%;">推荐人</th>
+                        <th style="width:8%;">推荐人等级</th>
+                        <th style="width:15%;">推荐时间</th>
+                        <th style="width:15%;">客户的负责工作人员姓名</th>
+                        <th style="width:15%;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $client_list $item}
+                    <tr>
+                        <td>{$item['id']}</td>
+                        <td>{$item['name']}</td>
+                        <td>{$item['phone']}</td>
+                        <td>{$item['intention']}</td>
+                        <td>{$item['math']}&nbsp;套</td>
+                        <td>{$item['users']['realname']}</td>
+                        <td>
+                         {if $item['rank']['type'] == 1}
+                          <span style="color:red">一等级</span>
+                        {elseif $item['rank']['type']== 2}
+                          <span style="color:orange">二等级</span>
+                        {elseif $item['rank']['type']== 3}
+                          <span style="color:green">三等级</span>
+                        {/if}
+                        <td>{$item['time']}</td>
+                        <td>
+                          {if $item['brokername'] == ''}
+                              <span style="color: red;">无人负责</span>
+                          {else}
+                            {$item['brokername']}
+                          {/if}
+                        </td>
+
+                        <td style="text-align:left;">
+                          <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'client_details','id'=>$item['id'],'users'=>$item['users']['id'],'rank'=>$item['rank']['id']));}" title="详情">详情</a>
+                          <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'client_edit','id'=>$item['id'],'users'=>$item['users']['id'],'rank'=>$item['rank']['id']));}" title="编辑">编辑</a>
+                           
+                          <a class="btn btn-danger btn-sm" href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'client_delete','id'=>$item['id'],'users'=>$item['users']['id']));}" title="删除客户信息" onclick="return confirm('此操作不可恢复，确认删除？');return false;"><i class="fa fa-times"></i></a>
+                      </td>                    
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager1}
+            </div>
+        </div>
+    </form>
+</div>

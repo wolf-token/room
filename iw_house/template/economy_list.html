@@ -1,0 +1,131 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li {if $operation == 'list'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'list'));}">经纪人列表</a></li>
+       <li {if $operation == 'client'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'client'));}">客户列表</a></li>
+</ul>
+<div class="main">
+<div class="alert alert-info">
+        <h4>
+            <i class="fa fa-info-circle"></i>
+            说明: 升级授权权限仅限二级经纪人升一级时起到限制作用！（未授权代表禁止二级经纪人升为一级）<br>
+        </h4>
+    </div>
+  <div class="panel panel-info">
+      <div class="panel-heading">筛选</div>
+      <div class="panel-body">
+        <form action="./index.php" method="post" class="form-horizontal" role="form">
+          <input type="hidden" name="c" value="site" />
+          <input type="hidden" name="a" value="entry" />
+          <input type="hidden" name="m" value="iw_house" />
+          <input type="hidden" name="do" value="brokerlist" />
+          <input type="hidden" name="op" value="list" />
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+            <div class="col-sm-8 col-lg-9">
+              <input class="form-control" name="keyword" placeholder="昵称/真实姓名/电话" type="text" value="">
+            </div>
+            <div class=" col-xs-12 col-sm-2 col-lg-2">
+              <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+            </div>
+          </div>
+          <div class="form-group">
+          </div>
+        </form>
+      </div>
+  
+    </div>
+    <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:8%;">ID</th>
+                        <th style="width:8%;">微信昵称</th>
+                        <th style="width:6%;">头像</th>
+                        <th style="width:6%;">真实姓名</th>
+                        <th style="width:7%;">电话</th>
+                        <th style="width:6%;">身份证号</th>
+                        <th style="width:7%;">等级</th>
+                        <th style="width:7%;">升级授权状态</th>
+                        <th style="width:7%;">佣金</th>
+                        <th style="width:6%;">用户类型</th>
+                        <th style="width:6%;">推荐人</th>
+                        <th style="width:15%;">创建时间</th>
+                        <th style="width:12%;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $economy_list $item}
+                    <tr>
+                        <td>{$item['id']}</td>
+                        <td>{$item['nickname']}</td>
+                        <td>
+            {if $item['avatar'] != ""}            
+            <img style="width:40px; height:40px;" src="{$item['avatar']}">
+            {else}
+              <span><img style="width:40px; height:40px;" src="/attachment/images/3/2016/12/logo.jpg"></span>
+            {/if}
+                        </td>
+                        <td>{$item['realname']}</td>
+                        <td>{$item['mobile']}</td>
+                        <td>{if $item['Idcard'] == ""}
+                        		<span style="color: red;">无</span>
+                        		{else}
+                        		{$item['Idcard']}
+                        		{/if}
+                        </td>
+                        <td>
+                         {if $item['rank'] == 1}
+                          <span style="color:red">一等级</span>
+                        {elseif $item['rank']== 2}
+                          <span style="color:orange">二等级</span>
+                        {elseif $item['rank']== 3}
+                          <span style="color:green">三等级</span>
+                        {/if}
+                        </td>
+                        <td>
+                         {if $item['accredit'] == 0}
+                          <span style="color:green">已授权</span>
+                        {elseif $item['accredit']== 1}
+                          <span style="color:red">未授权</span>
+                        
+                        {/if}
+                        </td>
+                        <td>{$item['money']}&nbsp;&nbsp;元</td>
+                        <td>
+                        {if $item['type'] == 0}
+                          <span style="color:red">普通用户</span>
+                        {elseif $item['type']== 1}
+                          <span style="color:green">经纪人</span>
+                        {/if}
+                         </td>
+                        <td>
+
+                            {if $item['recommend_id'] == ''}
+                                自己申请
+                            {elseif $item['recommend_id'] == 0}
+                                <span style="color: green">自己申请</span>
+                            
+                            {else}
+                              {$item['recommon_name']}
+                            
+                            {/if}
+                        </td>
+                        <td>{$item['createtime']}</td>
+
+                        <td style="text-align:left;">
+	                        <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'details','id'=>$item['id'],'commission'=>$item['commission'],'grade_id'=>$item['grade_id']));}" title="详情">详情</a>
+	                        <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'edit','id'=>$item['id'],'commission'=>$item['commission'],'grade_id'=>$item['grade_id']));}" title="编辑">编辑</a>
+                           
+	                        <a class="btn btn-danger btn-sm" href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'delete','id'=>$item['id'],'commission'=>$item['commission'],'grade_id'=>$item['grade_id']));}" title="删除用户" onclick="return confirm('此操作不可恢复，确认删除？');return false;"><i class="fa fa-times"></i></a>
+                      </td>                    
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager}
+            </div>
+        </div>
+    </form>
+</div>

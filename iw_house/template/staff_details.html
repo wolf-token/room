@@ -1,0 +1,184 @@
+{template 'common/header'}
+<style type="text/css">
+  .col-sm-9{
+    padding-top:7px;
+  }
+</style>
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'list'));}">站点列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'add'));}">站点添加</a></li>
+     <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'staff'));}">员工信息</a></li>
+      <li><a href="{php echo  $this->createWebUrl('stationlist', array('op'=>'staff_add'));}">添加员工信息</a></li>
+     <li class="active"><a>员工详细信息</a></li>
+</ul>
+<div class="main">
+  <div class="clearfix">    
+    <div class="form form-horizontal">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               员工详细信息
+            </div>
+            <div class="panel-body">             
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$staff_details['name']}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工电话</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$staff_details['phone']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">职位</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {if $staff_details['title'] == 0}
+                            总经理
+                          {elseif $staff_details['title'] == 1}
+                            销售总监
+                            {elseif $staff_details['title'] == 2}
+                              财务总监
+                              {elseif $staff_details['title'] == 3}
+                              销售经理/店长
+                              {elseif $staff_details['title'] == 4}
+                              置业顾问
+                          {/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工性别</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {if $staff_details['gender'] == 0}
+                            女
+                          {elseif $staff_details['gender'] == 1}
+                            男
+                          {/if}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工照片</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <img src="/attachment/{$staff_details['pictures']}" style="width:200px"> 
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工已分配的客户数量</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$staff_details['math']}&nbsp;人
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工已分配的房源联系人数量</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$staff_details['month']}&nbsp;人
+                    </div>
+                </div>
+                {if $staff_details['station'] == 0}
+              
+                  <span style="color: red;font-size: 20px">此员工所属站点已被删除，请重新分配站点！！！</span>
+                {else}
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工所属站点名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                      {$staff_details['sta']['name']}
+                    </div>
+                
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工所属站点负责人姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$staff_details['sta']['username']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工所属站点负责人电话</label>
+                    <div class="col-sm-9 col-xs-12">
+                      {$staff_details['sta']['phone']}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">员工所属站点地址</label>
+                    <div class="col-sm-9 col-xs-12">
+                      {$staff_details['sta']['province']}{$staff_details['sta']['city']} {$staff_details['sta']['county']}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">站点店面图</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <img src="/attachment/{$staff_details['sta']['pictures']}" style="width:100px"> 
+                    </div>
+                </div>
+             {/if}
+
+        <div class="alert alert-info">
+        <h4 style="color:green">
+            <i class="fa fa-info-circle"></i>
+           此员工负责客户列表<br>
+        </h4>
+    </div>
+     <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:15%;">客户姓名</th>
+                        <th style="width:15%;">客户电话</th>          
+                        <th style="width:15%;">客户购买房数</th>          
+                        <th style="width:15%;">添加时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $staffo $item}
+                    <tr>
+                        <td>{$item['name']}</td>
+                        <td>{$item['phone']}</td>
+                        <td>{$item['math']}&nbsp;套</td>
+                        <td>{$item['time']}</td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager3}
+            </div>
+        </div>
+    </form>
+      <div class="alert alert-info">
+        <h4 style="color:green">
+            <i class="fa fa-info-circle"></i>
+           此员工负责的房源联系人列表<br>
+        </h4>
+    </div>
+     <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:15%;">房东姓名</th>
+                        <th style="width:15%;">房东电话</th>          
+                        <th style="width:15%;">房东拥有房源数两</th>          
+                        <th style="width:15%;">添加时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $person $it}
+                    <tr>
+                        <td>{$it['name']}</td>
+                        <td>{$it['cell']}</td>
+                        <td>{$it['math']}&nbsp;套</td>
+                        <td>{$it['time']}</td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager4}
+            </div>
+        </div>
+    </form>
+    </div>

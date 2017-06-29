@@ -1,0 +1,252 @@
+{template 'common/header'}
+<style type="text/css">
+  .col-sm-9{
+    padding-top:7px;
+  }
+</style>
+<ul class="nav nav-tabs">
+      <li {if $operation == 'list'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'list'));}">经纪人列表</a></li>
+     <li  {if $operation == 'details'} class="active" {/if}><a>经纪人详情</a></li>
+     <li {if $operation == 'client'} class="active" {/if}><a href="{php echo  $this->createWebUrl('brokerlist', array('op'=>'client'));}">客户列表</a></li>
+</ul>
+<div class="main">
+  <div class="clearfix">    
+    <div class="form form-horizontal">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               经纪人详情
+            </div>
+            <div class="panel-body">             
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信昵称</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$economy_details['nickname']}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信头像</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <img src="{$economy_details['avatar']}" width="120px" height="120px">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">真实姓名</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {$economy_details['realname']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">手机号码</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {$economy_details['mobile']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">身份证号</label>
+                    <div class="col-sm-9 col-xs-12">
+                         {if $economy_details['Idcard'] == ""}
+                         <span style="color: red">未获取身份证号</span>
+                         {else}
+                         {$economy_details['Idcard']}
+                         {/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">佣金</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {$economy_details['comm']['money']}&nbsp;&nbsp;&nbsp;元
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">等级</label>
+                    <div class="col-sm-9 col-xs-12">
+
+                         {if $economy_details['rank']['type'] == 1}
+                          <span style="color:red">一等级</span>
+                        {elseif $economy_details['rank']['type']== 2}
+                          <span style="color:orange">二等级</span>
+                        {elseif $economy_details['rank']['type']== 3}
+                          <span style="color:green">三等级</span>
+                        {/if}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">升级授权</label>
+                    <div class="col-sm-9 col-xs-12">
+
+                          {if $economy_details['accredit'] == 0}
+                          <span style="color:green">已授权</span>
+                        {elseif $economy_details['accredit']== 1}
+                          <span style="color:red">未授权</span>
+                        
+                        {/if}
+                        <span style="color:red">（此授权仅限于二级升一级的权限限制）</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">创建时间</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {$economy_details['createtime']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">类型</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {if $economy_details['type'] == 0}
+                          <span style="color:red">普通用户</span>
+                        {elseif $economy_details['type']== 1}
+                          <span style="color:green">经纪人</span>
+                        {/if}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐经纪人总数</label>
+                    <div class="col-sm-9 col-xs-12">
+                          <span style="color:green">{$economy_details['month']}&nbsp;&nbsp;人&nbsp;</span>
+                          
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">团队总人数</label>
+                    <div class="col-sm-9 col-xs-12">
+                          <span style="color:green">{$economy_details['month1']}&nbsp;&nbsp;人&nbsp;</span>
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐一级人数</label>
+                    <div class="col-sm-9 col-xs-12">
+                          {if $type1 == ''}
+                            <span>0&nbsp;&nbsp;人</span>
+                          {else}
+                          <span style="color:red">{$type1}&nbsp;&nbsp;人</span>
+                          {/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐二级人数</label>
+                    <div class="col-sm-9 col-xs-12">
+                          {if $type2 == ''}
+                            <span>0&nbsp;&nbsp;人</span>
+                          {else}
+                          <span style="color:orange">{$type2}&nbsp;&nbsp;人</span>
+                          {/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐三级人数</label>
+                     <div class="col-sm-9 col-xs-12">
+                          {if $type3 == ''}
+                            <span>0&nbsp;&nbsp;人</span>
+                          {else}
+                          <span style="color:blue">{$type3}&nbsp;&nbsp;人</span>
+                          {/if}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">本人推荐房源数量</label>
+                    <div class="col-sm-9 col-xs-12">
+                       
+                          <span style="color:green">{$economy_details['man']}&nbsp;&nbsp;&nbsp;套</span>
+                        
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">团队推荐房源数量</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {if $economy_details['room'] == ''}
+                          <span style="color:red">0&nbsp;&nbsp;&nbsp;套</span>
+                        {else}
+                          <span style="color:green">{$economy_details['room']}&nbsp;&nbsp;&nbsp;套</span>
+                        {/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">本人推荐客户总数量</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {if $economy_details['mam'] == ''}
+                          <span style="color:red">0&nbsp;&nbsp;&nbsp;人</span>
+                        {else}
+                          <span style="color:green">{$economy_details['mam']}&nbsp;&nbsp;&nbsp;人</span>
+                        {/if}
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">团队推荐客户总数量</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {if $economy_details['mama'] == ''}
+                          <span style="color:red">0&nbsp;&nbsp;&nbsp;人</span>
+                        {else}
+                          <span style="color:green">{$economy_details['mama']}&nbsp;&nbsp;&nbsp;人</span>
+                        {/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">本人推荐客户已购房人数</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <span style="color:red">{$economy_details['buy']}&nbsp;&nbsp;&nbsp;人</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">本人推荐客户未购房人数</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <span style="color:red">{$economy_details['sale']}&nbsp;&nbsp;&nbsp;人</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">本人推荐客户购房数量</label>
+                    <div class="col-sm-9 col-xs-12">
+                       <span style="color:red">{$economy_details['shu']}&nbsp;&nbsp;&nbsp;套</span>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">团队推荐客户购房数量</label>
+                    <div class="col-sm-9 col-xs-12">
+                       {if $account2 == ''}
+                          <span style="color:red">0&nbsp;&nbsp;&nbsp;套</span>
+                        {else}
+                          <span style="color:green">{$account2}&nbsp;&nbsp;&nbsp;套</span>
+                        {/if}
+                        （本人推荐客户除外）
+                    </div>
+                </div>
+              <div class="alert alert-info">
+        <h4 style="color:green">
+            <i class="fa fa-info-circle"></i>
+           此经纪人分配佣金详细列表<br>
+        </h4>
+    </div>
+     <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:15%;">ID</th>
+                        <th style="width:15%;">经纪人姓名</th>          
+                        <th style="width:15%;">下线推荐用户购房所分配佣金数</th>        
+                        <th style="width:15%;">自己推荐用户购房所分配佣金数</th>    
+                        <th style="width:15%;">自己推荐房源所分配佣金数</th>    
+                        <th style="width:15%;">分配的时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $station_staff $item}
+                    <tr>
+                        <td>{$item['id']}</td>
+                        <td>{$economy_details['realname']}</td>
+                        <td>{$item['rank_money']}&nbsp;元</td>
+                        <td>{$item['myself']}&nbsp;元</td>
+                        <td>{$item['room']}&nbsp;元</td>
+                        <td>{$item['time']}</td>
+                        
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager2}
+            </div>
+        </div>
+    </form>
+    </div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>关于我</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<style type="text/css">
+		a{
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'recommend'))}">
+	<div style="width:90%;margin:3% 5%;color: #7C7C7C;font-weight: bold;">
+		<img width="10%" src="/addons/iw_house/template/mobile/images/1.png">&nbsp;&nbsp;<span style="position: relative;top:-10px;">我要推荐</span>
+		<img width="9%" style="float: right;" src="/addons/iw_house/template/mobile/images/back.png">&nbsp;&nbsp;
+	</div>
+	</a>
+	<hr style="border:1px solid #F2F2F2">
+	<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'share'))}">
+	<div  style="width:90%;margin:3% 5%;color: #7C7C7C;font-weight: bold;">
+		<img width="10%" src="/addons/iw_house/template/mobile/images/myshare.png">&nbsp;&nbsp;<span style="position: relative;top:-10px;">我要分享</span>
+		<img width="9%" style="float: right;" src="/addons/iw_house/template/mobile/images/back.png">&nbsp;&nbsp;
+	</div>
+	</a>
+	<hr style="border:1px solid #F2F2F2">
+	<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'team'))}">
+	<div width="100%" style="width:90%;margin:3% 5%;color: #7C7C7C;font-weight: bold;">
+		<img width="10%" src="/addons/iw_house/template/mobile/images/3.png">&nbsp;&nbsp;<span style="position: relative;top:-10px;">我的团队</span>
+		<img width="9%" style="float: right;" src="/addons/iw_house/template/mobile/images/back.png">&nbsp;&nbsp;
+	</div>
+	</a>
+	<hr style="border:1px solid #F2F2F2">
+	<a href="{php echo $this->createMobileUrl('aboutmine',array('op'=>'yjin'))}">
+	<div width="100%" style="width:90%;margin:3% 5%;color: #7C7C7C;font-weight: bold;">
+		<img width="10%" src="/addons/iw_house/template/mobile/images/3.png">&nbsp;&nbsp;<span style="position: relative;top:-10px;">我的佣金</span>
+		<img width="9%" style="float: right;" src="/addons/iw_house/template/mobile/images/back.png">&nbsp;&nbsp;
+	</div>
+	</a>
+	<!-- <hr style="border:6px solid #F2F2F2"> -->
+
+	<div style="width:100%;height:25%; border-top:8px solid #F2F2F2;">
+		<div style="background: #9FCFF3;width:40%;height:30px;text-align:center;line-height:35px;color: white;border-radius: 8px;font-size: 20px;margin:3% 0 3% 4%;">规则说明</div>
+	</div>
+	<div style="width:92%;height:250px;margin:0 auto; border-top:5px solid #A6D18C;border-bottom:5px solid #A6D18C;overflow:auto;">
+
+	<div style="width:96%;height:100%;margin:0 auto;">
+		{$aboutmine['rule']['content']}{$aboutmine['rank_one']['information']}{$aboutmine['rank_two']['information']}{$aboutmine['assign']['information']}
+	</div>
+	</div>
+	<!-- <hr style="border:2px solid #A6D18C"> -->
+	<div style="width: 100%;height: 60px"></div>
+
+{template foot}
+</body>
+</html>

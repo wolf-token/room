@@ -1,0 +1,97 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+      <li class="active"><a href="{php echo  $this->createWebUrl('carrylist', array('op'=>'list'));}">提现记录列表</a></li>
+     <li><a href="{php echo  $this->createWebUrl('carrylist', array('op'=>'add'));}">添加提现</a></li>
+</ul>
+<div class="main">
+    <div class="alert alert-info">
+        <h4>
+            <i class="fa fa-info-circle"></i>
+            说明: 提现申请,需要管理员手动打款,打款后标记对应的提现申请处理成功<br>
+        </h4>
+        <p style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;商户结算数据涉及钱款操作，请认真审核，谨慎操作！</p>
+    </div>
+     <div class="panel panel-info">
+      <div class="panel-heading">搜索</div>
+      <div class="panel-body">
+        <form action="./index.php" method="post" class="form-horizontal" role="form">
+          <input type="hidden" name="c" value="site" />
+          <input type="hidden" name="a" value="entry" />
+          <input type="hidden" name="m" value="iw_house" />
+          <input type="hidden" name="do" value="carrylist" />
+          <input type="hidden" name="op" value="list" />
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+            <div class="col-sm-8 col-lg-9">
+              <input class="form-control" name="keyword" placeholder="提现人姓名/电话/提现时间（格式：2016-11-22）" type="text" value="">
+            </div>
+            <div class=" col-xs-12 col-sm-2 col-lg-2">
+              <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+            </div>
+          </div>
+          <div class="form-group">
+          </div>
+        </form>
+      </div>
+  
+    </div>
+    <form action="" method="post" class="form-horizontal form">
+        <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:7%;">ID</th>
+                        <th style="width:6%;">姓名</th>
+                        <th style="width:12%;">手机号</th>
+                        <th style="width:6%;">身份证号</th>
+                        <th style="width:10%;">微信昵称</th>
+                        <th style="width:10%;">经纪人等级</th>
+                        <th style="width:12%;">现有总佣金数</th>
+                        <th style="width:10%;">提现金额</th>
+                        <th style="width:8%;">提现人姓名</th>
+                        <th style="width:10%;">提现人电话</th>
+                        <th style="width:14%;">提现时间</th>
+                        <th style="width:15%;text-align: center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $carry_list $item}
+                        <td>{$item['id']}</td>
+                        <td>{$item['users']['realname']}</td>
+                        <td>{$item['users']['mobile']}</td>
+                        <td>{$item['users']['Idcard']}</td>
+                        <td>{$item['users']['nickname']}</td>
+                        <td>
+                              {if $item['users']['rank']['type'] == 1}
+                              <span style="color:red">一等级</span>
+                            {elseif $item['users']['rank']['type']== 2}
+                              <span style="color:orange">二等级</span>
+                            {elseif $item['users']['rank']['type']== 3}
+                              <span style="color:green">三等级</span>
+                            {/if}
+                        </td>
+                        <td>
+                           
+                                {$item['users']['come']['money']}&nbsp;&nbsp;元
+                          
+                        </td>
+                        <td>{$item['money']}&nbsp;&nbsp;元</td>
+                        <td>{$item['name']}</td>
+                        <td>{$item['cell']}</td>
+                        <td>{$item['time']}</td>
+                        <td style="text-align: center">
+      <!-- 
+                            <a class="btn btn-info btn-sm" href="{php echo  $this->createWebUrl('carrylist', array('op'=>'edit','id'=>$item['users']['id'],'commission'=>$item['users']['come']['id'],'carray'=>$item['id']));}" title="修改提现记录">编辑</a>
+                            -->
+                            <a class="btn btn-danger btn-sm" href="{php echo  $this->createWebUrl('carrylist', array('op'=>'delete','id'=>$item['users']['id'],'carray'=>$item['id'],'commission_id'=>$item['users']['come']['id']));}" title="删除提现" onclick="return confirm('此操作不可恢复，确认删除？');return false;"><i class="fa fa-times"></i></a>
+                      </td>       
+                    </tr>
+                    {/loop}
+                    </tbody>
+                </table>
+                {$pager}
+            </div>
+        </div>
+    </form>
+</div>

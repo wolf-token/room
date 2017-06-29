@@ -1,0 +1,102 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+      <li><a href="{php echo  $this->createWebUrl('carrylist', array('op'=>'list'));}">提现记录列表</a></li>
+     <li class="active"><a href="{php echo  $this->createWebUrl('carrylist', array('op'=>'add'));}">添加提现</a></li>
+</ul>
+<div class="main">
+    <div class="alert alert-info">
+        <h4 style="color:green">
+            <i class="fa fa-info-circle"></i>
+            最大提现金额：{$max1['max']}&nbsp;&nbsp;元<br>
+        </h4>
+        <h4>
+            <i class="fa fa-info-circle"></i>
+            说明: 提现申请,需要管理员手动打款,打款后标记对应的提现申请处理成功<br>
+        </h4>
+        <p style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;商户结算数据涉及钱款操作，请认真审核，谨慎操作！</p>
+    </div>
+  {if $max1['max'] == 0}
+                     
+       <div class="alert alert-info" style="color:red">
+          <h4>
+              <i class="fa fa-info-circle"></i>
+              说明: 如果禁止提现，请等待管理员修改提现规则后在进行提现！！！<br>
+          </h4>
+      </div>
+                   
+  {/if} 
+
+       <div class="panel panel-default">
+            <div class="table-responsive panel-body">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                          <th style="width:10%;">经纪人姓名</th>
+                          <th style="width:10%;">经纪人手机号</th>
+                          <th style="width:12%;">经纪人身份证号</th>
+                          <th style="width:10%;">微信昵称</th>
+                          <th style="width:10%;">经纪人等级</th>
+                          <th style="width:12%;">现有总佣金数</th>
+                           {if $max1['max'] == 0}
+                          <th colspan="4">提现状态</th>
+                            
+                          {else}
+                          <th style="width:12%;">提现人姓名</th>
+                          <th style="width:14%;">提现电话</th>
+                          <th style="width:12%;">提现金额</th>
+                          <th style="width:12%;text-align: center">操作</th>
+                        {/if}
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {loop $carry_add $item}
+                        <td>{$item['users']['realname']}</td>
+                        <td>{$item['users']['mobile']}</td>
+                        <td>{$item['users']['Idcard']}</td>
+                        <td>{$item['users']['nickname']}</td>
+                        <td>
+                              {if $item['rank']['type'] == 1}
+                              <span style="color:red">一等级</span>
+                            {elseif $item['rank']['type']== 2}
+                              <span style="color:orange">二等级</span>
+                            {elseif $item['rank']['type']== 3}
+                              <span style="color:green">三等级</span>
+                            {/if}
+                        </td>
+                        <td>
+                        <form action="./index.php?c=site&a=entry&op=carray&do=carrylist&m=iw_house" method="post" class="form-horizontal form">     
+                                {$item['money']}&nbsp;&nbsp;元
+                          
+                        </td>
+                         {if $max1['max'] == 0}
+                        <td colspan="4">
+                          <span style="color:red">禁止提现</span>
+                        </td>
+                        {else}
+                         <td><input type="text" name="name" style="width:100px"></td>
+                          <td><input type="tell" name="cell"  maxlength="11" style="width:120px"></td>
+                        <td><input type="number" name="money" style="width:100px">&nbsp;&nbsp;元</td>
+                       
+                        <td style="text-align: center">
+                       
+                          <input type="hidden" name="id" value="{$item['id']}">
+                          <input type="hidden" name="users_id" value="{$item['users']['id']}">
+                          <input type="hidden" name="carray_id" value="{$item['rank']['id']}">
+                            <input type="submit" class="btn btn-success btn-sm" value="提现" title="管理" onclick="return confirm('确认提现吗？');return false;">
+                      </td>        
+                    {/if}
+                       </form>     
+                    </tr>
+                      
+                    {/loop}
+                    </tbody>
+                </table>
+                
+                {$pager1}
+            </div>
+           
+        </div>
+   
+</div>
+

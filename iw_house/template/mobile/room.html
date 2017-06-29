@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<meta content="email=no" name="format-detection">
+		<title>房源</title>
+		<style>
+			html,
+			body,
+			div,
+			span,
+			applet,
+			object,
+			iframe,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			p,
+			blockquote,
+			pre,
+			a,
+			abbr,
+			acronym,
+			address,
+			big,
+			cite,
+			code,
+			del,
+			dfn,
+			em,
+			font,
+			img,
+			ins,
+			kbd,
+			q,
+			s,
+			samp,
+			small,
+			strike,
+			strong,
+			sub,
+			sup,
+			tt,
+			var,
+			b,
+			u,
+			i,
+			center,
+			dl,
+			dt,
+			dd,
+			ol,
+			ul,
+			li,
+			fieldset,
+			form,
+			label,
+			legend,
+			table,
+			caption,
+			tbody,
+			tfoot,
+			thead,
+			tr,
+			th,
+			td {
+				margin: 0;
+				padding: 0;
+				border: 0;
+				outline: 0;
+				font-size: 100%;
+				vertical-align: baseline;
+				background: transparent;
+			}
+
+			body {
+				line-height: 1;
+			}
+
+			ol,
+			ul {
+				list-style: none;
+			}
+
+			blockquote,
+			q {
+				quotes: none;
+			}
+
+			blockquote:before,
+			blockquote:after,
+			q:before,
+			q:after {
+				content: '';
+				content: none;
+			}
+			a{
+				color: black;
+				text-decoration:none;
+			}
+			/* remember to define focus styles! */
+
+			:focus {
+				outline: 0;
+			}
+			/* remember to highlight inserts somehow! */
+
+			ins {
+				text-decoration: none;
+			}
+
+			del {
+				text-decoration: line-through;
+			}
+			/* tables still need 'cellspacing="0"' in the markup */
+
+			table {
+				border-collapse: collapse;
+				border-spacing: 0;
+			}
+
+			.ft{
+			float: left;
+				}
+				.fu{
+				float:right;
+			}
+			.nof{
+				clear:both;
+			}
+
+			.heidss {
+				width: 100%;
+				height: 70px;
+				/*border: 1px solid red;*/
+				background-color: #fff;
+			}
+
+			.heidss li {
+				float: left;
+				height: 60px;
+				font-family: "微软雅黑";
+				/*color: #fff;*/
+				line-height: 60px;
+				font-size: 18px;
+				text-align: center;
+			}
+
+			.banner-guild {
+				width: 100%;
+				height: 130px;
+				/*border: 1px solid red;*/
+			}
+			.banner-gold {
+				width: 40%;
+				height: auto;
+				border: 1px solid #ccc;
+				margin:5% 4% 5% 5%; 
+				background-color: #fff;
+				float: left;
+			}
+			img {
+				width: 100%;
+				height: 100%;
+				display: inline-block;
+			}
+
+			.banner-fen {
+				width: 94%;
+				height: 120px;
+				background:#fff;
+				float: left;
+				padding: 1% 1%;
+				border: 3px solid #A9D28E;
+				margin-top: 3%;
+				margin-left: 1%;
+
+			}
+			.banner-fang {
+				width: 50%;
+				height: 100px;
+				/*background: #005F9F;*/
+				float: left;
+				padding: 1% 1%;
+				border: 1px solid red;
+				/* margin-top: 10%;
+				margin-left: 10%; */
+				margin: 0% 10% 20% 0%;
+				font-size: 15px;
+				/*border-radius: 10%;*/
+			}
+			.banner-fang li {
+				/*display: inline-block;*/
+				padding-top: 10%;
+				float: left;
+			}
+			.banner-fen li {
+				/*display: inline-block;*/
+				float: left;
+			}
+			.fen-img {
+				width: 40%;
+				height: 120px;
+				margin-right: 5px;
+			}
+			.fen-ma {
+				width: 100%;
+				height: 30px;
+				margin-right: 5px;
+			}
+			.fen-ziti {
+				width: 54%;
+				height: 120px;
+				font-family: "楷体";
+				/*color: #fff;*/
+				/*line-height: 100px;*/
+				font-size: 13px;
+				/*margin-bottom: 3%;*/
+			}
+
+			.banner-guild p {
+				margin: 5% 0;
+			}
+
+			.liebiao {
+				width: 92%;
+				height: 120px;
+				/*border: 1px solid red;*/
+				padding: 2% 4%;
+				border-bottom: 10px solid #ebe9e9;
+				float: left;
+				background-color: #fff;
+			}
+			.liebiao li{
+				float: left;
+			}
+
+			.liebiao-img {
+				width: 40%;
+				height: 120px;
+				margin-right: 8px;
+			}
+
+			.liebiao-ziti {
+				width: 53%;
+				height: 100px;
+				font-family: "楷体";
+				/*color: #fff;*/
+				/*line-height: 100px;*/
+				font-size: 14px;
+				padding: 3% 0;
+			}
+
+			.liebiao-ziti p {
+				margin: 3% 0;
+			}
+/*//////////////////////////////////////////////////////////*/
+			.fangyuan {
+				width: 100%;
+				height: 40px;
+				background-color: #FAFAFA;
+
+			}
+
+			.fangyuan li {
+				float: left;
+				/*border: 1px solid red;*/
+				height: 20px;
+				line-height: 20px;
+				font-family: "宋体";
+				/*font-weight: bold;*/
+				font-size: 13px;
+				text-align: center;
+				/*background-color: #2AC845;*/
+				margin: 1% 1%;
+				border-radius: 5px;
+				color: black;
+			}
+
+			.fangyuan span {
+				padding: 3px;
+				/*background: red;*/
+				font-size: 14px;
+				border-radius: 5px;
+			}
+
+			.spann {
+				background-color: #2AC845;
+			}
+
+			.spannf {
+				background-color: #fff;
+			}
+
+			.esde {
+				/*border: 1px solid red;*/
+				width: 100%;
+				height: 93px;
+				display: none;
+				position: absolute;
+				top: 8.5%;
+				left: 0;
+				/*background-color: rgba(0, 0, 0, 0.3);*/
+				z-index: 20;
+			}
+
+			.zhezhao {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				left: 0;
+				background-color: rgba(0, 0, 0, 0.3);
+				z-index: 10;
+				display: none;
+			}
+
+			.xin-liebiao {
+				width: 94%;
+				height: 40px;
+				background: #fff;
+				position: absolute;
+				top: 42%;
+				font-size: 15px;
+				left: 0;
+				/*display: none;*/
+				padding: 3% 3% 1% 3%;
+			}
+
+			.xuan-liebiao {
+				width: 32%;
+				height: 160px;
+				/*border: 1px solid red;*/
+			}
+
+			.xuan-liebiao li {
+				margin-top: 5%;
+				margin-left: 2%;
+			}
+
+			.select {
+				position: relative;
+				width: 99%;
+				/*min-width: 134px;*/
+				height: 36px;
+				border: 1px solid #eee;
+				cursor: pointer;
+			}
+
+			.select:after {
+				content: "";
+				position: absolute;
+				top: 50%;
+				right: 10px;
+				margin-top: -2px;
+				border-top: 5px solid #666;
+				border-right: 5px solid transparent;
+				border-left: 5px solid transparent;
+			}
+
+			.select .select_text {
+				padding: 0 20px 0 10px;
+				height: 36px;
+				line-height: 36px;
+			}
+
+			.select_ul {
+				display: none;
+				position: absolute;
+				top: 34px;
+				left: -1px;
+				width: 134px;
+				min-width: 134px;
+				border: 1px solid #D4D4D4;
+				border-bottom-right-radius: 3px;
+				border-bottom-left-radius: 3px;
+				background: #fff;
+			}
+
+			.select_ul li {
+				line-height: 36px;
+				text-indent: 10px;
+			}
+
+			.select_ul li:hover {
+				color: #fff;
+				background: #6AA7EA;
+			}
+
+			.select_ul li.cur {
+				color: #fff;
+				background: #195DA3;
+			}
+			#xuanze{
+				width:12%;
+			}
+			#xinfang{
+				width:16%;
+			}
+			#ershou{
+				width: 20%;
+			}
+			body{
+				background-color:#F2F2F2;
+			}
+			.zhuan1{
+				background-color:#DFDFDF;
+			}
+			.dddtu{
+				width:50%;
+				height: 60px;
+				margin:5% 1% 5% 7%;
+				border: 2px solid #FAF08F;
+				 float:left;
+			}
+			.dddzi{
+				float:left;
+				width:37%;
+				/*border: 1px solid #FAF08F;*/
+				margin: 5% 0 0 0 ;
+			}
+			.dddzi img{
+				width:70%;
+				height:90%;
+				margin-left: 10%;
+				margin-top:10%;
+				/*border: 1px solid #FAF08F;*/
+			}
+		</style>
+<script type="text/javascript" src="/app/resource/js/lib/jquery-1.11.1.min.js"></script>
+	</head>
+
+	<body>
+
+	<form method="post" action="{php echo $this->createMobileUrl('room',array('op'=>'check'))}">
+		<!-- <div class=""> -->
+			<ul class="heidss" id="demo">
+				<li style="width: 25%; margin-left: 3%;">地区</li>
+				<li style="width: 25%;">房型</li>
+				<li style="width: 24%;margin-left: 3%;">装修等级</li>
+				<li style="width: 10%;height:40px;"><img style="padding-top: 10px" src="/addons/iw_house/template/mobile/images/down.png"></li>
+			</ul>
+			<div id="kong" class="esde">
+				<div class="fangyuan">
+					<ul id="navigator">
+						<li id="xuanze">选择</li>
+						<li id="xinfang"><input type="radio" name="type" value="0" />新房</li>
+						<li id="ershou"> <input type="radio" name="type" value="1" />二手房</li>
+						<li id="ershou"> <input type="radio" name="type" value="2" />毛坯房</li>
+						<li style="width:" id="quding"><button style="border-radius: 5px;color: white;background: #4caf50;">确定</button></li>
+					</ul>
+
+				</div>
+				<div class="xin-liebiao">
+					<div class="xuan-liebiao ft">
+						<select class="select" name="city">
+						{loop $city $ke=>$item}
+							<option value="{$item['id']}">{$item['city']}{$item['county']}</option>
+						{/loop}
+						</select>
+					</div>
+					<div class="xuan-liebiao ft">
+						<select class="select" name="pattern">
+						{loop $type $key=>$ite}
+							<option value="{$ite['id']}">{$ite['name']}</option>
+						{/loop}
+						</select>
+					</div>
+					<div class="xuan-liebiao ft" style="width: 30%">
+						<select class="select" name="decorate">
+							<option value="0">简修</option>
+							<option value="1">精装</option>
+							<option value="2">豪装</option>
+							<option value="3">未装修</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="zhuan1" id="lottery">
+
+			<div class="mingdan2">
+				<div class="biaoti">
+					<marquee behavior="scroll" scrolldelay="200">
+
+						{loop $tisment $row}
+						<span {if $row['status'] == 1} style="display: none;" {/if}>
+
+							<img style="width:8%" src="/addons/iw_house/template/mobile/images/logo1.jpg" alt=""><span style="position: relative;top: -6px;color: red;font-size: 20px">&nbsp;&nbsp;{$row['info']}&nbsp;&nbsp;{$row['cell']}</span>
+						</span>
+						{/loop}
+					</marquee>
+				</div>
+			</div>
+		</div>
+		{loop $area $to}
+		<div class="banner-gold">
+			<a href="{php echo $this->createMobileUrl('home',array('op'=>'room','tid'=>$to['id']))}">
+				
+				<div class="dddtu">
+					<img style="width: 100%;height:100%" src="/attachment/{$to['photo']['imguqcl']}">
+				</div>
+				<div class="dddzi">
+				<span style="font-size:10px;text-align:center;font-weight: bold;">{$to['name']}房源</span>
+					<img style="width: 50%" src="/addons/iw_house/template/mobile/images/jiajia.png">
+				</div>
+			</a>
+		</div>
+		{/loop}
+		<!-- <div class="banner-gold">
+			<a href="{php echo $this->createMobileUrl('home',array('op'=>'single','mid'=>$it['id']))}">
+				
+				<div class="dddtu">
+					<img style="width: 100%;height:100%" src="/attachment/images/12/2016/12/OcLj3z0ZfH3pcc77078wLZV3qJZ3W7.jpg">
+				</div>
+				<div class="dddzi">
+				<span style="font-size:10px;text-align:center;">保定房源</span>
+					<img  src="/addons/iw_house/template/mobile/images/jiajia.png">
+				</div>
+			</a>
+		</div> -->
+		{loop $home $it}
+		<div class="banner-guild">
+
+			<a href="{php echo $this->createMobileUrl('home',array('op'=>'single','mid'=>$it['id']))}">
+				<div class="banner-fen">
+					<ul>
+						<li class="fen-img">
+							<img src="/attachment/{$it['pictures']['imguqcl']}">
+						</li>
+						<li class="fen-ziti">
+							<p><b>名称:</b><span>{$it['name']}</span></p>
+							<p><b>面积:</b><span>{$it['area']}㎡</span></p>
+							<p><b>格局:</b><span>{$it['pat']['name']}</span></p>
+							<p><b>位置:</b><span>{$it['position']}</span></p>
+						</li>
+					</ul>
+					<div style="width:8%;height:35%;position: relative;bottom:90px;left: 85%;color: white"><img width="100%" src="/addons/iw_house/template/mobile/images/recommend.png"></div>
+				</div>
+			</a>
+
+			</div>
+{/loop}
+
+			{loop $room $itu}
+
+				<div class="liebiao">
+				<a href="{php echo $this->createMobileUrl('home',array('op'=>'single','mid'=>$itu['id']))}">
+					<ul>
+						<li class="liebiao-img">
+							<img src="/attachment/{$itu['pictures']['imguqcl']}">
+						</li>
+						<li class=" liebiao-ziti">
+							<p><b>名称:</b><span>{$itu['name']}</span></p>
+							<p><b>面积:</b><span>{$itu['area']}㎡</span></p>
+							<p><b>格局:</b><span>{$itu['pat']['name']}</span></p>
+							<p><b>位置:</b><span>{$itu['position']}</span></p>
+						</li>
+
+					</ul>
+				</a>
+				</div>
+
+			{/loop}
+
+			<div class="zhezhao" id="zhezhao"></div>
+			<!-- <script src="jquery-1.8.3.js"></script> -->
+			<div style="width: 100%;height: 60px"></div>
+	{template foot}
+			<script>
+				// $(function() {
+				// 	$("ul#navigator li").click(function() {
+				// 		$(this).addClass("spann").siblings().removeClass("spann");
+				// 	})
+				// });
+				$(function() {
+					$("#demo").click(function() {
+						if($("#kong").is(":hidden")) {
+							$("#kong").show(); //如果元素为隐藏,则将它显现
+						} else {
+							$("#kong").hide(); //如果元素为显现,则将其隐藏
+						}
+					})
+				});
+				$(function() {
+					$("#demo").click(function() {
+						if($("#zhezhao").is(":hidden")) {
+							$("#zhezhao").show(); //如果元素为隐藏,则将它显现
+						} else {
+							$("#zhezhao").hide(); //如果元素为显现,则将其隐藏
+						}
+					})
+				});
+				$(function() {
+					$("#zhezhao").click(function() {
+						if($("#zhezhao").is(":hidden")) {
+							$("#zhezhao").show(); //如果元素为隐藏,则将它显现
+						} else {
+							$("#zhezhao").hide(); //如果元素为显现,则将其隐藏
+						}
+					})
+				});
+				$(function() {
+					$("#zhezhao").click(function() {
+						if($("#kong").is(":hidden")) {
+							$("#kong").show(); //如果元素为隐藏,则将它显现
+						} else {
+							$("#kong").hide(); //如果元素为显现,则将其隐藏
+						}
+					})
+				});
+			</script>
+			<script>
+				;(function($){
+    //默认参数
+    var defaluts = {
+        select: "select",
+        select_text: "select_text",
+        select_ul: "select_ul"
+    };
+    $.fn.extend({
+        "select": function(options){
+            var opts = $.extend({}, defaluts, options);
+            return this.each(function(){
+                var $this = $(this);
+                //模拟下拉列表
+                if ($this.data("value") !== undefined && $this.data("value") !== '') {
+                    $this.val($this.data("value"));
+                }
+                var _html = [];
+                _html.push("<div class=\"" + $this.attr('class') + "\">");
+                _html.push("<div class=\""+ opts.select_text +"\">" + $this.find(":selected").text() + "</div>");
+                _html.push("<ul class=\""+ opts.select_ul +"\">");
+                $this.children("option").each(function () {
+                    var option = $(this);
+                    if($this.data("value") == option.val()){
+                        _html.push("<li class=\"cur\" data-value=\"" + option.val() + "\">" + option.text() + "</li>");
+                    }else{
+                        _html.push("<li data-value=\"" + option.val() + "\">" + option.text() + "</li>");
+                    }
+                });
+                _html.push("</ul>");
+                _html.push("</div>");
+                var select = $(_html.join(""));
+                var select_text = select.find("." + opts.select_text);
+                var select_ul = select.find("." + opts.select_ul);
+                $this.after(select);
+                $this.hide();
+                //下拉列表操作
+                select.click(function (event) {
+                    $(this).find("." + opts.select_ul).slideToggle().end().siblings("div." + opts.select).find("." + opts.select_ul).slideUp();
+                    event.stopPropagation();
+                });
+                $("body").click(function () {
+                    select_ul.slideUp();
+                });
+                select_ul.on("click", "li", function () {
+                    var li = $(this);
+                    var val = li.addClass("cur").siblings("li").removeClass("cur").end().data("value").toString();
+                    if (val !== $this.val()) {
+                        select_text.text(li.text());
+                        $this.val(val);
+                        $this.attr("data-value",val);
+                    }
+                });
+            });
+        }
+    });
+})(jQuery);
+ $(function(){
+                $('select.select').select();
+            });
+			</script>
+	</body>
+
+</html>
